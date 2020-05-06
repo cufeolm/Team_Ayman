@@ -9,8 +9,7 @@ function void verify_add(GUVM_sequence_item cmd_trans,GUVM_result_transaction re
 
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
-		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
-		
+		hist_trans.loadreg(h1[31:0],cmd_trans.rd);	
 	end
 	else if (cmd_trans.SOM == SB_VERIFICATION_MODE)begin
 		foreach(hist_trans.item_history[i])begin
@@ -20,6 +19,7 @@ function void verify_add(GUVM_sequence_item cmd_trans,GUVM_result_transaction re
 			end
 		end
 		//hc = res_trans.result;
+		h1 = hist_trans.get_reg_data(cmd_trans.rd);
 		if((h1) == (hc))
 		begin
 			`uvm_info ("ADDITION_PASS", $sformatf("DUT Calculation=%h SB Calculation=%h ", hc, h1), UVM_LOW)

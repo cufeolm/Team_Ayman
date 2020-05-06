@@ -106,6 +106,15 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"BA":begin
 					verify_ba(cmd_trans,res_trans,hist_trans);
 				end
+				"Jalr":begin
+					verify_JumpAndLinkRegImm(cmd_trans,res_trans,hist_trans);
+				end
+				"Jalr_cpc":begin
+					verify_JumpAndLinkRegImm_cpc(cmd_trans,res_trans,hist_trans);
+				end
+				"Jalrr":begin
+					verify_JumpAndLinkRegReg(cmd_trans,res_trans,hist_trans);
+				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
