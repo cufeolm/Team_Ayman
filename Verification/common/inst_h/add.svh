@@ -3,6 +3,7 @@ function void verify_add(GUVM_sequence_item cmd_trans,GUVM_result_transaction re
 	i1 = hist_trans.get_reg_data(cmd_trans.rs1); 
 	i2 = hist_trans.get_reg_data(cmd_trans.rs2); 
 	h1 = i1 + i2 ;
+	$display("i1=%h i2=%h h1=%h",i1,i2,h1);
 	//hist_trans.updateflags (h1);
 
 

@@ -20,8 +20,8 @@ function void verify_JumpAndLink(GUVM_sequence_item cmd_trans,GUVM_result_transa
 			end
 		end
 		foreach(hist_trans.item_history[i])begin
-			if ((hist_trans.item_history[i+1].seq_item.current_pc - hist_trans.item_history[i].seq_item.current_pc) > 32'd4) begin
-				 actual_npc = hist_trans.item_history[i+1].seq_item.current_pc; 
+			if ((hist_trans.item_history[i+1].cmd_trans.current_pc - hist_trans.item_history[i].cmd_trans.current_pc) > 32'd4) begin
+				 actual_npc = hist_trans.item_history[i+1].cmd_trans.current_pc; 
 				 break ; 
 			end
 		end
