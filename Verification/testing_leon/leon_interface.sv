@@ -26,7 +26,11 @@ interface GUVM_interface(input  clk );
     icdiag_in_type dcache_output_diag; // inside dcache_out_type package // what is this ? 
 
     // declaring the monitor
-    GUVM_monitor monitor_h;
+    GUVM_result_monitor result_monitor_h;
+
+    command_monitor command_monitor_h;
+
+    logic [31:0]next_pc;
 
     bit allow_pseudo_clk;
 
@@ -34,13 +38,6 @@ interface GUVM_interface(input  clk );
     initial begin
         clk_pseudo = 0;
         allow_pseudo_clk = 0 ;
-        /*forever begin
-            if (allow_pseudo_clk)begin
-                $display(clk_pseudo);
-                @(posedge clk) clk_pseudo = clk;
-            end
-        end*/
-        
 	end	
     always @(clk) begin
         if (allow_pseudo_clk)begin
@@ -65,29 +62,60 @@ interface GUVM_interface(input  clk );
     function void send_inst(logic [31:0] inst);
         icache_output.data = inst ; 
     endfunction
-	
+
+    function void update_command_monitor(GUVM_sequence_item cmd);
+        //cmd.current_pc=icache_input.rpc;
+        command_monitor_h.write_to_cmd_monitor(cmd);
+
+    endfunction
+    function void update_result_monitor();
+        //result_monitor_h.write_to_monitor(dcache_input.edata,next_pc);
+        result_monitor_h.write_to_monitor(dcache_input.maddress,next_pc);
+    endfunction
+
+    function logic[31:0] get_cpc();
+        logic [31:0] x ;
+        x[1:0]=0;
+        x[31:2]=icache_input.rpc;
+        return x;
+    endfunction
+    /*
+    function void monitor_cmd(GUVM_sequence_item cmd);
+        command_monitor_h.write_to_cmd_monitor(cmd);
+    endfunction
+    */
+    // danger zone *************************
+   // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // *** ************* *********************
+    // all of the below functions are not used except setup and reset
     // sending the instruction to be verified
-	task verify_inst(logic [31:0] inst);
+    /*
+    task verify_inst(logic [31:0] inst,logic [31:0]op1,logic [31:0]op2,logic [31:0]simm);
+        command_monitor_h.write_to_cmd_monitor(inst,op1,op2,simm);
         send_inst(inst) ; 
         toggle_clk(1);
-        //allow_pseudo_clk =1 ;
-        //@(posedge clk_pseudo) ;//nop();
-       // repeat(3)@(posedge clk_pseudo);
-        //repeat(4)@(posedge clk_pseudo);
-       // repeat(5)@(posedge clk_pseudo);
-       // allow_pseudo_clk =0 ;
-		//repeat(2*5)#10 clk=~clk;
-        //repeat(2*5)#10 clk=~clk;
+        nop();
+        get_npc();
     endtask
-    function logic[31:0] get_cpc();
-        $display("current_pc = %b       %t", icache_input.rpc,$time);
-        return icache_input.rpc;
-      endfunction
+    */
+
+
+    task get_npc();
+      toggle_clk(1);
+      $display("next_pc = %b       %t", icache_input.rpc,$time);
+      next_pc = icache_input.rpc;
+    endtask
 
 	// reveiving data from the DUT
     function logic [31:0] receive_data();//should be protected
         //$display("madd : %b",dcache_input.maddress);
-        monitor_h.write_to_monitor(dcache_input.edata,icache_input.rpc);
+        result_monitor_h.write_to_monitor(dcache_input.edata,next_pc);
         return dcache_input.edata;
        // monitor_h.write_to_monitor(dcache_input.maddress);
 		//return dcache_input.maddress;
@@ -175,7 +203,7 @@ interface GUVM_interface(input  clk );
 
         dcache_output.icdiag=dcache_output_diag;
         //repeat (2*10)#10 clk=~clk;
-        $display("we reached this point at set up");
+        //$display("we reached this point at set up");
        // allow_pseudo_clk =1 ;
         //repeat(10)@(posedge clk_pseudo);
        // allow_pseudo_clk =0 ;
@@ -186,7 +214,7 @@ interface GUVM_interface(input  clk );
         rst = 1'b0;
         //repeat (2*10)#10 clk=~clk;  
         //allow_pseudo_clk =1 ;
-        $display("we reached this point at reset");
+        //$display("we reached this point at reset");
        // repeat(10)@(posedge clk_pseudo);
         toggle_clk(10);
 		rst = 1'b1;

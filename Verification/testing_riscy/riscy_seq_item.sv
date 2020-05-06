@@ -13,10 +13,10 @@ class target_seq_item extends GUVM_sequence_item;
 	endfunction
 
 	logic [6:0]funct7;
-	logic [4:0]rs2;
-	logic [4:0]rs1;
+	//logic [4:0]rs2;
+	//logic [4:0]rs1;
 	logic [2:0]funct3;
-	logic [4:0]rd;
+	//logic [4:0]rd;
 	logic [6:0]opcode;
 	logic [11:0]immb11_0;
 	logic [6:0]immb11_5;
@@ -50,7 +50,9 @@ class target_seq_item extends GUVM_sequence_item;
 		temp = get_format(inst);
 		//if (!($cast(leon,temp))) 
 		//$fatal(1,"failed to cast transaction to leon's transaction"); 
+		$display("before :simm= %h simm= %b",temp.simm,temp.simm);
 		do_copy(temp);
+		$display("after :simm= %h simm= %b",simm,simm);
 	endfunction
 
 	function void do_copy(uvm_object rhs);
@@ -59,12 +61,14 @@ class target_seq_item extends GUVM_sequence_item;
 		    $fatal(1,"Tried to copy null transaction");
 		super.do_copy(rhs);
 		assert($cast(RHS,rhs)) else
-	  		$fatal(1,"Faied cast in do_copy");
+	  		$fatal(1,"Failed cast in do_copy");
+			simm = RHS.simm;
 	  		funct7 = RHS.funct7;
 			rs2 = RHS.rs2;
 			rs1 = RHS.rs1;
 			funct3 = RHS.funct3;
 			rd = RHS.rd;
+			v = RHS.v;
 			opcode = RHS.opcode;
 			immb11_0 = RHS.immb11_0;
 			immb11_5 = RHS.immb11_5;

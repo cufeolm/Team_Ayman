@@ -4,9 +4,10 @@ package target_package;
 
     // instructions opcodes verified in this core 
 	typedef enum logic[31:0] {
-		LW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
+		//LW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
 		A = 32'b0000000xxxxxxxxxx000xxxxx0110011,
-		SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
+		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
+		NOP =32'h0000001B ,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 		Store =32'b0000000xxxxx00000010000000100011,
         Load = 32'b00000000000000000010xxxxx0000011
@@ -51,6 +52,8 @@ package target_package;
 					//U-type
 					ay.immb31_12 = inst[31:12];
 					ay.rd = inst[11:7];
+					ay.simm = {inst[31:12],{12{0}}}; // they are shifted 12 bit to left as in ISA
+					ay.zimm = {inst[31:12],{12{0}}}; // they are shifted 12 bit to left as in ISA
 				end
 			J_type:
 				begin
@@ -60,6 +63,8 @@ package target_package;
 					ay.immb11 = inst[20];
 					ay.immb19_12 = inst[19:12];
 					ay.rd = inst[11:7];
+					ay.simm = {{12{inst[31]}},inst[19:12],inst[20],inst[30:21],1'b0};
+					ay.zimm = {{12{0}},inst[31],inst[20:12],inst[20],inst[30:21]};
 				end
 			I_type, I_type1:
 				begin
@@ -68,6 +73,8 @@ package target_package;
 					ay.rs1 = inst[19:15];
 					ay.funct3 = inst[14:12];
 					ay.rd = inst[11:7];
+					ay.simm = {{20{inst[31]}},inst[31:20]};
+					ay.zimm = {{20{0}},inst[31:20]};
 				end
 			I_type_shift:
 				begin
@@ -87,6 +94,8 @@ package target_package;
 								ay.rs1 = inst[19:15];
 								ay.funct3 = inst[14:12];
 								ay.rd = inst[11:7];
+								ay.simm = {{20{inst[31]}},inst[31:20]};
+								ay.zimm = {{20{0}},inst[31:20]};
 							end
 				end
 			I_type_fence:
@@ -113,6 +122,8 @@ package target_package;
 					ay.rs2 = inst[24:20];
 					ay.immb4_1 = inst[11:8];
 					ay.immb11 = inst[7];
+					ay.simm = {{20{inst[31]}},inst[7],inst[30:25],inst[11:8],1'b0};
+					ay.zimm = {{20{0}},inst[31],inst[7],inst[30:25],inst[11:8]};
 				end
 			S_type:
 				begin
@@ -122,7 +133,8 @@ package target_package;
 					ay.rs1 = inst[19:15];
 					ay.funct3 = inst[14:12];
 					ay.immb4_0 = inst[11:7];
-
+					ay.simm = {{20{inst[31]}},inst[31:25],inst[11:7]};
+					ay.zimm = {{20{0}},inst[31:25],inst[11:7]};
 				end
 			R_type:
 				begin
@@ -134,8 +146,7 @@ package target_package;
 					ay.rd = inst[11:7];
 				end
 		endcase // ay.opcode
-		if(!($cast(k,ay)))
-			$fatal(1, "failed to cast transaction to riscy's transaction");
+		if(!($cast(k,ay)))	$fatal(1, "failed to cast transaction to riscy's transaction");
 		return k;
 	endfunction
 
@@ -144,6 +155,7 @@ package target_package;
 	function bit xis1 (logic[31:0] a,logic[31:0] b);
 		logic x;
 		x = (a == b);
+		if(x==1) return 1 ;
 		if (x === 1'bx)
 			begin
 				return 1'b1;

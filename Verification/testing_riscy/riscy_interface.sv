@@ -81,7 +81,9 @@ interface GUVM_interface(input  clk );
 
     logic [31:0]next_pc;
 
-    GUVM_monitor monitor_h;
+    GUVM_result_monitor result_monitor_h;
+
+    command_monitor command_monitor_h;
 
     bit allow_pseudo_clk;
 
@@ -119,17 +121,23 @@ interface GUVM_interface(input  clk );
     endfunction
     
     // sending the instruction to be verified
-    task verify_inst(logic [31:0] inst);
+    task verify_inst(logic [31:0] inst,logic [31:0]op1,logic [31:0]op2,logic [31:0]simm);
       send_inst(inst); 
       toggle_clk(1);
       nop();
       get_npc();
     endtask
     
+    function void update_command_monitor(GUVM_sequence_item cmd);
+      command_monitor_h.write_to_cmd_monitor(cmd);
+    endfunction
+    function void update_result_monitor();
+      result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
+    endfunction
     // reveiving data from the DUT
     function logic [31:0] receive_data();
         $display("received result: %b", data_wdata_o);
-        monitor_h.write_to_monitor(data_wdata_o,next_pc);
+        result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
         return data_wdata_o; 
     endfunction 
     

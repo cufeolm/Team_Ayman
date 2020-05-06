@@ -6,10 +6,13 @@ package target_package;
     typedef enum logic [31:0] {
         LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx,
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
-        N=32'b00000001000000000000000000000000,
+        ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
+        ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
+        Ai=32'b10xxxxx000000xxxxx1xxxxxxxxxxxxx,
+        NOP=32'b00000001000000000000000000000000,
         S=32'b10xxxxx000100xxxxx000000000xxxxx,
-        Bie=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
-        BA=32'b0011000010xxxxxxxxxxxxxxxxxxxxxx,
+        BIE=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
+        BA= 32'b0001000010xxxxxxxxxxxxxxxxxxxxxx,
         //Bie=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
         Load = 32'b11xxxxx0000000000010000000000000
@@ -61,6 +64,8 @@ package target_package;
                         begin
                             ay.rd = inst[29:25];
                             ay.imm22 = inst[21:0];
+                            ay.simm = {{10{inst[21]}},inst[21:0]};
+                            ay.zimm = {{10{0}},inst[21:0]};
                         end
                     3'b010, 3'b110, 3'b111 :
                         //branch & fp branch & co branch format 2
@@ -68,6 +73,8 @@ package target_package;
                             ay.a = inst[29];
                             ay.cond = inst[28:25];
                             ay.disp22 = inst[21:0];
+                            ay.simm = {{10{inst[21]}},inst[21:0]};
+                            ay.zimm = {{10{0}},inst[21:0]};
                         end
                     default: uvm_report_error("k.instruction", "k.instruction format not defined");
                 endcase
@@ -87,6 +94,8 @@ package target_package;
                     //format 3 register immediate
                     begin
                         ay.imm13 = inst[12:0];
+                        ay.simm = {{19{inst[12]}},inst[12:0]};
+                        ay.zimm = {{19{0}},inst[12:0]};
                     end
 
             end
@@ -103,7 +112,8 @@ package target_package;
     function bit xis1 (logic[31:0] a,logic[31:0] b);
     logic x;
     x = (a == b);
-    if (x === 1'bx)
+    if(x==1) return 1 ;
+    else if (x === 1'bx)
         begin
             return 1'b1;
         end
