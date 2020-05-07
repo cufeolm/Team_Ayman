@@ -3,7 +3,7 @@
 
 class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     `uvm_object_utils(GUVM_sequence);
-    target_seq_item command,load1,load2,store,nop , temp ;
+    target_seq_item command,load1,load2,store,nop , temp ,reset;
     target_seq_item c;
     function new(string name = "GUVM_sequence");
         super.new(name);
@@ -38,8 +38,9 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     endtask
 
     task body();
-        repeat(1)
+        repeat(10)
         begin
+            reset=target_seq_item::type_id::create("reset");
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
             load2 = target_seq_item::type_id::create("load2"); //load register y with data dy
             command = target_seq_item::type_id::create("command");//send add instruction (or any other instruction under test)
@@ -47,7 +48,8 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
-            command.ran_constrained(Jal); // first randomize the instruction as an add (A is the enum code for add)
+            reset.SOM = SB_RESET_MODE;
+            command.ran_constrained(A); // first randomize the instruction as an add (A is the enum code for add)
             //nop.ran_constrained(NOP);
             command.setup();//set up the instruction format fields 
             if ($isunknown(command.rs1))
@@ -70,6 +72,8 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
 			//send the sequence
             //load1.data=load1.data*4;
             //load2.data=load2.data*4;
+            send(reset);
+
             send(load1);
             
             genNop(5,load1.data);
@@ -92,6 +96,8 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
             temp = copy(command);
             temp.SOM = SB_VERIFICATION_MODE ; 
             send(temp);
+
+            send(reset);
             
             //genNop(10);
             

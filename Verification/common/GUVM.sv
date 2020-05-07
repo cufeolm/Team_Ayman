@@ -1,7 +1,8 @@
 
     typedef enum logic [2:0] {
         SB_HISTORY_MODE= 0 ,
-        SB_VERIFICATION_MODE= 1 
+        SB_VERIFICATION_MODE= 1 ,
+        SB_RESET_MODE= 2
     } GUVM_TB_SOM;//score board operation mode
 
 `include "GUVM_result_transaction.sv"
