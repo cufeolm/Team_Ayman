@@ -6,14 +6,14 @@ onerror {quit}
 
 vlog -f ../testing_riscy/DUT_riscy.f 
 
-vlog +incdir+../testing_leon+../common+../common/inst_h+../common/Tests+../common/sequences ../testing_leon/target_pkg.sv
+vlog +incdir+../testing_riscy+../common+../common/inst_h+../common/Tests+../common/sequences ../testing_riscy/target_pkg.sv
 
 vlog ../testing_riscy/riscy_interface.sv
 vlog ../testing_riscy/top.sv
 
-vsim -novopt top
+#vsim -novopt top
 
-log /* -r
+#log /* -r
 
-run -all
+#run -all
 quit
