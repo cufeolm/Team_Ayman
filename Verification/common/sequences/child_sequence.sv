@@ -1,5 +1,5 @@
 
-//generates the sequence of instructions needed to test an add instruction 
+//this is an example of how to make a sequence
 
 class child_sequence extends GUVM_sequence ;
     `uvm_object_utils(child_sequence);
