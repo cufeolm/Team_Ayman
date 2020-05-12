@@ -3,6 +3,7 @@ class GUVM_test extends uvm_test;
 
     GUVM_env       env_h;
     GUVM_sequence generic_sequence_h;
+    uvm_cmdline_processor cmdline_proc;
 
     function new(string name = "GUVM_test", uvm_component parent);
         super.new(name, parent);

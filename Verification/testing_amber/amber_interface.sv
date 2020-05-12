@@ -58,7 +58,7 @@ interface GUVM_interface(input clk);
     task send_inst(logic [31:0] inst);
         indicator = inst; // distinguishing the load instruction: amber only
         Rd = inst[15:12]; // destination register address bits: 4 bits 
-        if(xis1(indicator,32'b1010101010101010xxxx101010101010)) begin // accessing the register file by forcing
+        if((indicator[31:16] == 16'b1010101010101010) && (indicator[11:0] == 12'b101010101010)) begin // accessing the register file by forcing
             i_wb_dat = {128'hF0801003F0801003F0801003F0801003};
             case(Rd)
                 4'b0000: dut.u_execute.u_register_bank.r0 = data_in;
