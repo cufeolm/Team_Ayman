@@ -36,7 +36,7 @@ class GUVM_history_transaction extends uvm_transaction;
         $display("yay time to print my history");
 
         $display("--- reg_file Values are ---");
-        foreach(reg_file[i])   $display("\treg_file[%0d] = %p",i, reg_file[i]);
+        foreach(reg_file[i])   $display("\treg_file[%0d] = %p %h",i, reg_file[i],reg_file[i].data);
         $display("---------------------------------");
         
         foreach(item_history[i])begin
