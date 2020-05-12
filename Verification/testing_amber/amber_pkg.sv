@@ -4,11 +4,12 @@ package target_package;
 
     // instructions opcodes verified in this core 
     typedef enum logic[31:0] { 
-        LW = 32'b111101101001xxxxxxxxxxxxxxxxxxxx,
-        SW = 32'b111001011000xxxxxxxxxxxxxxxxxxxx,
+        //LW = 32'b111101101001xxxxxxxxxxxxxxxxxxxx,
+        NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
+        //SW = 32'b111001011000xxxxxxxxxxxxxxxxxxxx,
         A  = 32'b1110000010000xxx0xxx000000000xxx,
         Store = 32'b11100101100000000xxx000000000000,
-        Load =  32'b1111011010010xxx0xxx000000000xxx 
+        Load =  32'b10101010101010100xxx101010101010 
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
     
@@ -65,6 +66,8 @@ package target_package;
                                     ay.rd = inst[15:12];
                                     ay.rs2 = inst[3:0];
                                     ay.s = inst[20];
+                                    ay.simm = {{27{inst[11]}},inst[11:7]};
+				                	ay.zimm = {{27{0}},inst[11:7]}; 
                                 end
                         end
                     else if(inst[7] == 1'b0)
@@ -100,6 +103,8 @@ package target_package;
 				ay.s = inst[20];
 				ay.encode_imm = inst[11:8];
 				ay.imm8 = inst[7:0];
+                ay.simm = {{24{inst[7]}},inst[7:0]};
+                ay.zimm = {{24{0}},inst[7:0]};
 			end
 		TRANS_imm: // Single Data Transfer (TRANS)
 			begin // immediate offset 
@@ -111,6 +116,8 @@ package target_package;
 				ay.b = inst[22];
 				ay.w = inst[21];
 				ay.l = inst[20];
+                ay.simm = {{20{inst[11]}},inst[11:0]};
+                ay.zimm = {{20{0}},inst[11:0]};
 			end
 		TRANS_reg: // Single Data Transfer (TRANS)
 			begin // register offset
@@ -124,6 +131,8 @@ package target_package;
 				ay.l = inst[20];
 				ay.shift = inst[6:5];
 				ay.shift_imm = inst[11:7];
+                ay.simm = {{27{inst[11]}},inst[11:7]};
+                ay.zimm = {{27{0}},inst[11:7]};
 			end
 		MTRANS: //Block Data Transfer (MTRANS)
 			begin
@@ -139,6 +148,8 @@ package target_package;
 			begin
 				ay.l = inst[24];
 				ay.offset24 = inst[23:0];
+                ay.simm = {{8{inst[23]}},inst[23:0]};
+                ay.zimm = {{8{0}},inst[23:0]};
 			end
 		CODTRANS: // Coprocessor Data Transfer (CODTRANS)
 			begin
@@ -151,6 +162,8 @@ package target_package;
 				ay.n = inst[22];
 				ay.w = inst[21];
 				ay.l = inst[20];
+                ay.simm = {{24{inst[7]}},inst[7:0]};
+                ay.zimm = {{24{0}},inst[7:0]};
 			end
 		COREGOP_CORTRANS_SWI:
 			begin
@@ -193,6 +206,7 @@ package target_package;
     // used in if conditions to compare between (x) and (1 or 0)
     function bit xis1 (logic[31:0] a,logic[31:0] b); 
         logic x;
+        $display("xis1:                 a=%h,b=%h",a,b);
         x = (a == b);
         if(x==1) return 1 ;
         if (x === 1'bx)

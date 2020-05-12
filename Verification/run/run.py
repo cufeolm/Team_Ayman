@@ -45,6 +45,12 @@ DUT: """;
 		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
 	elif g == "333":
 		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
+	elif g == "w1":
+		os.system("vsim -view vsim.wlf -do ../testing_riscy/wave.do")
+	elif g == "w2":
+		os.system("vsim -view vsim.wlf -do ../testing_leon/wave.do")
+	elif g == "w3":
+		os.system("vsim -view vsim.wlf -do ../testing_amber/wave.do")
 	else:
 		print("please enter a valid number")
 		break

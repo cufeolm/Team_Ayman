@@ -11,10 +11,10 @@ class target_seq_item extends GUVM_sequence_item;
 
 	logic [3:0] cond;
 	logic [3:0] opcode;
-	logic [3:0] rs1;  // rn
-	logic [3:0] rd;
+	//logic [3:0] rs1;  // rn
+	//logic [3:0] rd;
 	logic [3:0] rs;
-	logic [3:0] rs2;    // rm
+	//logic [3:0] rs2;    // rm
 	logic [11:0] offset12;
 	logic [15:0] register_list;
 	logic [23:0] offset24;
@@ -69,7 +69,10 @@ class target_seq_item extends GUVM_sequence_item;
 			$fatal(1,"Tried to copy null transaction");
 		super.do_copy(rhs);
 		assert($cast(RHS,rhs)) else
-			$fatal(1,"Faied cast in do_copy");
+		$fatal(1,"Faied cast in do_copy");
+		current_pc = RHS.current_pc;
+		zimm = RHS.zimm;
+		simm = RHS.simm;	
 		cond = RHS.cond;
 		opcode = RHS.opcode;
 		rd = RHS.rd;

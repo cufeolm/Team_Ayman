@@ -70,6 +70,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 			// for loob to check that drived instruction is in opcodes array of the core
 			for(i=0;i<supported_instructions;i++) // supported instruction is number of instructions in opcodes array of the core
 				begin
+					//$display("xis1:                 a=%h,b=%h",verified_inst,si_a[i]);
 					if (xis1(verified_inst,si_a[i])) begin // si_a is opcodes array of the verified core
 						valid = 1;
 						break;	// break when instruction found in array to save its index in i
@@ -124,7 +125,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"Jalrr":begin
 					verify_JumpAndLinkRegReg(cmd_trans,res_trans,hist_trans);
 				end
-				default:`uvm_fatal("instruction fail", $sformatf("instruction is not add its %h", si_a[i]))
+				default:`uvm_fatal("instruction fail", $sformatf("instruction is not found its %h %s", si_a[i],si_a[i].name))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
 			$display("-------------------------------");

@@ -11,7 +11,7 @@ class add_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(10)
+        repeat(1)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx

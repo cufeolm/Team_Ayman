@@ -62,6 +62,8 @@ class target_seq_item extends GUVM_sequence_item;
 		super.do_copy(rhs);
 		assert($cast(RHS,rhs)) else
 	  		$fatal(1,"Failed cast in do_copy");
+			current_pc = RHS.current_pc;
+			zimm = RHS.zimm;
 			simm = RHS.simm;
 	  		funct7 = RHS.funct7;
 			rs2 = RHS.rs2;
