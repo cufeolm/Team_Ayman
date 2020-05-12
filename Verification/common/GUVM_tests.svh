@@ -2,3 +2,4 @@
 `include"add_test.sv"
 `include"bie_test.sv"
 `include"child_test.sv"
+`include"python_test.sv"
