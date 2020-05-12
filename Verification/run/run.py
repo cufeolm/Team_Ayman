@@ -60,14 +60,15 @@ please choose which test to simulate:
 1- add_test (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> 1 
 2- GUVM_test (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> 2
 3- bie_test (based on sparcv8 ISA): enter --> 3
-3- child_test (prototype): enter --> 4
+4- child_test (prototype): enter --> 4
+5- python_test (prototype): enter --> 5
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
 	print g;
 	if g == "1":
 		y=("add_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST=A; log /* -r ; run -all ; quit\"")
 	elif g == "2":
 		y=("GUVM_test")
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
@@ -77,6 +78,10 @@ DUT: """;
 	elif g == "4":
 		y=("child_test")
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
+	elif g == "5":
+		y=("python_test")
+		#os.system(x+y+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST=NOP; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
 		break

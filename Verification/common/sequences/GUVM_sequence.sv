@@ -5,9 +5,17 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     `uvm_object_utils(GUVM_sequence);
     //target_seq_item nop , temp ,reset;
     //target_seq_item c;
+    string clp_inst ; // command line processor input iinstruction
     function new(string name = "GUVM_sequence");
         super.new(name);
     endfunction : new
+
+    function clp(uvm_cmdline_processor cmdline_proc);
+        string my_value = "NOP";
+        int rc ; 
+        rc = cmdline_proc.get_arg_value("+ARG_INST=", my_value);
+        clp_inst = my_value;
+    endfunction
 
     task genNop(integer i , logic[31:0] data );//sends i number of nop with data
         repeat(i) begin
@@ -48,8 +56,11 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
         begin
             if(si_a[i].name == s) return si_a[i] ;
         end
+        $display("couldnt find %s inside instruction package",s);
         return NOP ; 
     endfunction
+
+    
 
 endclass : GUVM_sequence
 
