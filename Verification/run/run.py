@@ -62,6 +62,7 @@ please choose which test to simulate:
 3- bie_test (based on sparcv8 ISA): enter --> 3
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
+6- subcc_test (sparc v8): enter --> 6
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -80,14 +81,11 @@ DUT: """;
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	elif g == "5":
 		y=("python_test")
-		s="""
-please choose which instruction to simulate:
-1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
-2- branch if equal register (based on RISC-v ISA): enter --> BIER
-any other input will simulate no operation or make an error in the simulation
-DUT: """;
-		z=raw_input(s)
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		#os.system(x+y+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST=NOP; log /* -r ; run -all ; quit\"")
+	elif g == "6":
+		y=("subcc_test")
+		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
 		break
