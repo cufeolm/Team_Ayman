@@ -25,7 +25,10 @@ class add_sequence extends GUVM_sequence ;
             command.ran_constrained(findOP(clp_inst));
             
             //nop.ran_constrained(NOP);
+            $display("before the setup %d",command.data);
             command.setup();//set up the instruction format fields 
+            $display("after the setup %d",command.data);
+
             if ($isunknown(command.rs1))
                 load1.load(0);
             else
