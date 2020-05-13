@@ -110,8 +110,17 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"ADDX":begin
 					verify_addx(cmd_trans,res_trans,hist_trans);
 				end
-				"BIE":begin
-					verify_bie(cmd_trans,res_trans,hist_trans);
+				"BIEF":begin
+					verify_bief(cmd_trans,res_trans,hist_trans);
+				end
+				"BVSF":begin
+					verify_bvsf(cmd_trans,res_trans,hist_trans);
+				end
+				"BCSF":begin
+					verify_bcsf(cmd_trans,res_trans,hist_trans);
+				end
+				"BNEGF":begin
+					verify_bnegf(cmd_trans,res_trans,hist_trans);
 				end
 				"BA":begin
 					verify_ba(cmd_trans,res_trans,hist_trans);
@@ -124,6 +133,9 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				end
 				"Jalrr":begin
 					verify_JumpAndLinkRegReg(cmd_trans,res_trans,hist_trans);
+				end
+				"SUBCC":begin
+					verify_subcc(cmd_trans,res_trans,hist_trans);
 				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not found its %h %s", si_a[i],si_a[i].name))
 			endcase

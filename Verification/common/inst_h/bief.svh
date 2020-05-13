@@ -1,6 +1,6 @@
 
 
-function void verify_bie(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
+function void verify_bief(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
 	logic [31:0] pc ;
 	logic  dc ;
 	dc=0;

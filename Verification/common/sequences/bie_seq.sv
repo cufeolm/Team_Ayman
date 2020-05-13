@@ -38,7 +38,7 @@ class bie_sequence extends GUVM_sequence;
                 load2.rd=command.rs2;
             end 
             //store.store(command.rd);//specify regz address
-            branch.ran_constrained(findOP("BIE"));
+            branch.ran_constrained(findOP("BIEF"));
             load1.data = 32'hFFFFFFFF;
             load2.data = 32'h1;
 
