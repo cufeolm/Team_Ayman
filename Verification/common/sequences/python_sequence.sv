@@ -42,14 +42,17 @@ class python_sequence extends GUVM_sequence ;
             load2.load(0);
         else
         begin
-            load2.load(command.rs2);//specify regx address  
-            load2.rd=command.rs2;
+            load2.load(command.rs2);//specify regx address
+            load2.rd=command.rs2;  
         end 
-        store.store(command.rd);//specify regz address
-
+        if ($isunknown(command.rd))
+            store.store(0);
+        else
+        begin
+            store.store(command.rd);//specify regz address  
+        end 
         resetSeq();
         //send the sequence
-        
         send(load1);
         
         genNop(5,load1.data);

@@ -45,7 +45,7 @@ package riscy_package;
 								Srai=32'b010000xxxxxxxxxxx101xxxxx0010011,
 								JaL=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 								JaLr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,
-								Bie=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,
+								Bier=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,
 								Bigtoe=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,
 								Biltoe=32'bxxxxxxxxxxxxxxxxx100xxxxx1100011,
 								Bigtoeu=32'bxxxxxxxxxxxxxxxxx111xxxxx1100011,

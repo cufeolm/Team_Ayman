@@ -80,8 +80,14 @@ DUT: """;
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	elif g == "5":
 		y=("python_test")
-		#os.system(x+y+"; log /* -r ; run -all ; quit\"")
-		os.system(x+y+" +ARG_INST=NOP; log /* -r ; run -all ; quit\"")
+		s="""
+please choose which instruction to simulate:
+1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
+2- branch if equal register (based on RISC-v ISA): enter --> BIER
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
 		break

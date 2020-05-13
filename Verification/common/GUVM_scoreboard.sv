@@ -113,6 +113,9 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"BIE":begin
 					verify_bie(cmd_trans,res_trans,hist_trans);
 				end
+				"BIER":begin
+					verify_bier(cmd_trans,res_trans,hist_trans);
+				end
 				"BA":begin
 					verify_ba(cmd_trans,res_trans,hist_trans);
 				end

@@ -7,6 +7,7 @@
 `include "addcc.svh"
 `include "addx.svh"
 `include "bie.svh"
+`include "bier.svh"
 `include "ba.svh"
 `include "jalr.svh"
 `include "jalr_cpc.svh"
