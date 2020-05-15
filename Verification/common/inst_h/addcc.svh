@@ -10,7 +10,8 @@ function void verify_addcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction 
         hist_trans.carry=h1[32];
         hist_trans.neg = h1[31];
         hist_trans.zero = (h1[31:0]==0);
-        hist_trans.loadreg(h1[31:0],cmd_trans.rd);
+		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
+		hist_trans.overflow = (i1[31]&&i2[31]&&(~h1[31])) || ((~i1[31])&&(~i2[31])&&(h1[31]));
     end
     
     else if (cmd_trans.SOM == SB_VERIFICATION_MODE) // how to verify ? 

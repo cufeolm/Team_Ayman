@@ -20,7 +20,7 @@ class bie_sequence extends GUVM_sequence;
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
            
-            command.ran_constrained(findOP("ADDCC")); // first randomize the instruction as an add (A is the enum code for add)
+            command.ran_constrained(findOP("SUBCC")); // first randomize the instruction as an add (A is the enum code for add)
             //nop.ran_constrained(NOP);
             command.setup();//set up the instruction format fields 
             if ($isunknown(command.rs1))
@@ -39,7 +39,7 @@ class bie_sequence extends GUVM_sequence;
             end 
             //store.store(command.rd);//specify regz address
             branch.ran_constrained(findOP("BIEF"));
-            load1.data = 32'hFFFFFFFF;
+            load1.data = 32'h1;
             load2.data = 32'h1;
 
 
