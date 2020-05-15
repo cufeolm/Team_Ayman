@@ -19,6 +19,8 @@ class python_sequence extends GUVM_sequence ;
     
 
     task body();
+    repeat(10)
+    begin
         $display("child_seq,%s",clp_inst);
         load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
         load2 = target_seq_item::type_id::create("load2"); //load register y with data dy
@@ -76,7 +78,7 @@ class python_sequence extends GUVM_sequence ;
 
         resetSeq();
         //genNop(10);
-        
+    end    
     endtask : body
 
 

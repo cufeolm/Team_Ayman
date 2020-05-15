@@ -9,8 +9,12 @@ package target_package;
 		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
 		NOP =32'h0000001B ,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
-		Jalr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,
-		BIER=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,
+		BIGTOER=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,// branch if greater than or equal reg-reg (signed)
+		BILTR=32'bxxxxxxxxxxxxxxxxx100xxxxx1100011,// branch if less reg-reg (signed)
+		BIGTOERU=32'bxxxxxxxxxxxxxxxxx111xxxxx1100011,// branch if greater than or equal reg-reg (unsigned)
+		BILTRU=32'bxxxxxxxxxxxxxxxxx110xxxxx1100011,// branch if less reg-reg (unsigned)
+		Jalr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,// jump and link register-imm
+		BIER=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,// branch if equal reg-reg
 		Store =32'b0000000xxxxx00000010000000100011,
         Load = 32'b00000000000000000010xxxxx0000011
 	} opcode;

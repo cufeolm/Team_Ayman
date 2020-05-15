@@ -47,9 +47,9 @@ package riscy_package;
 								JaLr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,
 								Bier=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,
 								Bigtoe=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,
-								Biltoe=32'bxxxxxxxxxxxxxxxxx100xxxxx1100011,
+								Biltoe=32'bxxxxxxxxxxxxxxxxx100xxxxx1100011, /// must be just less no equal
 								Bigtoeu=32'bxxxxxxxxxxxxxxxxx111xxxxx1100011,
-								Biltoeu=32'bxxxxxxxxxxxxxxxxx110xxxxx1100011,
+								Biltoeu=32'bxxxxxxxxxxxxxxxxx110xxxxx1100011, /// must be just less no equal
 								Biei=32'bxxxxxxxxxxxxxxxxx010xxxxx1100011,
 								Binei=32'bxxxxxxxxxxxxxxxxx011xxxxx1100011
                             } opcode;
