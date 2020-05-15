@@ -113,6 +113,18 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"BIEF":begin
 					verify_bief(cmd_trans,res_trans,hist_trans);
 				end
+				"BIGTOER":begin
+					verify_bigtoer(cmd_trans,res_trans,hist_trans);
+				end
+				"BILTR":begin
+					verify_biltr(cmd_trans,res_trans,hist_trans);
+				end
+				"BIGTOERU":begin
+					verify_bigtoeru(cmd_trans,res_trans,hist_trans);
+				end
+				"BILTRU":begin
+					verify_biltru(cmd_trans,res_trans,hist_trans);
+				end
 				"BVSF":begin
 					verify_bvsf(cmd_trans,res_trans,hist_trans);
 				end

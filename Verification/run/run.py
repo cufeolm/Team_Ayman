@@ -81,8 +81,30 @@ DUT: """;
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	elif g == "5":
 		y=("python_test")
-		#os.system(x+y+"; log /* -r ; run -all ; quit\"")
-		os.system(x+y+" +ARG_INST=NOP; log /* -r ; run -all ; quit\"")
+		s="""
+please choose which instruction to simulate:
+1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
+2- branch if equal reg-reg (based on RISC-v ISA): enter --> BIER
+3- branch if greater than or equal reg-reg signed (based on RISC-v ISA): enter --> BIGTOER
+4- branch if less than or equal reg-reg signed (based on RISC-v ISA): enter --> BILTR
+5- branch if greater than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BIGTOERU
+6- branch if less than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BILTRU
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("A")
+		elif z == "2":
+			z=("BIER")
+		elif z == "3":
+			z=("BIGTOER")
+		elif z == "4":
+			z=("BILTR")
+		elif z == "5":
+			z=("BIGTOERU")
+		elif z == "6":
+			z=("BILTRU")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":
 		y=("subcc_test")
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
