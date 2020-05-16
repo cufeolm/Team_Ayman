@@ -1,4 +1,6 @@
+transcript file trans/Wave.txt
 onerror {resume}
+
 quietly WaveActivateNextPane {} 0
 add wave vsim:/top/bfm/allow_pseudo_clk
 add wave vsim:/top/bfm/clk_pseudo

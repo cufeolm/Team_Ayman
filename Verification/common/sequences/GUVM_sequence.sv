@@ -51,14 +51,7 @@ class GUVM_sequence extends uvm_sequence #(GUVM_sequence_item);
     /*task body();
         $display("GUVM_seq");
     endtask*/
-    function opcode findOP(string s);//returns the op code corresponding to string s from package
-        foreach(si_a[i]) // supported instruction is number of instructions in opcodes array of the core
-        begin
-            if(si_a[i].name == s) return si_a[i] ;
-        end
-        $display("couldnt find %s inside instruction package",s);
-        return NOP ; 
-    endfunction
+
 
     
 

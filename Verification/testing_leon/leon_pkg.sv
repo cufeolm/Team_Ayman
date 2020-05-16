@@ -15,16 +15,25 @@ package target_package;
         S=32'b10xxxxx000100xxxxx000000000xxxxx,
         SUBCC=32'b10xxxxx010100xxxxx000000000xxxxx,
 
-        BIEF=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
-        BCSF = 32'b0010101010xxxxxxxxxxxxxxxxxxxxxx,
-        BNEGF = 32'b0010110010xxxxxxxxxxxxxxxxxxxxxx,
-        BVSF = 32'b0010111010xxxxxxxxxxxxxxxxxxxxxx,
+        BIEF=32'b00x0001010xxxxxxxxxxxxxxxxxxxxxx,
+        BCSF = 32'b00x0101010xxxxxxxxxxxxxxxxxxxxxx,
+        BNEGF = 32'b00x0110010xxxxxxxxxxxxxxxxxxxxxx,
+        BVSF = 32'b00x0111010xxxxxxxxxxxxxxxxxxxxxx,
 
-        BA= 32'b0001000010xxxxxxxxxxxxxxxxxxxxxx,
+        BA= 32'b00x1000010xxxxxxxxxxxxxxxxxxxxxx,
         //BIEF=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
         Load = 32'b11xxxxx0000000000010000000000000
     } opcode;
+    
+    //INSTRUCTION FORMAT 
+    parameter RDU = 29;
+    parameter   RDL = 25;
+    parameter   RS1U = 18;
+    parameter   RS1L = 14;
+    parameter   RS2U = 4;
+    parameter   RS2L = 0;
+    
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
 
     opcode si_a [] ;    // opcodes array to store enums so we can randomize and use them
@@ -65,6 +74,15 @@ package target_package;
                 return 1'b0;
             end
         endfunction : xis1
+
+        function opcode findOP(string s);//returns the op code corresponding to string s from package
+            foreach(si_a[i]) // supported instruction is number of instructions in opcodes array of the core
+            begin
+                if(si_a[i].name == s) return si_a[i] ;
+            end
+            $display("couldnt find %s inside instruction package",s);
+            return NOP ; 
+        endfunction
 
 
 endpackage

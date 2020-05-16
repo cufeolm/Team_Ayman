@@ -3,44 +3,61 @@
 
 class bie_sequence extends GUVM_sequence;
     `uvm_object_utils(bie_sequence);
-    target_seq_item command,load1,load2,branch,temp ;
+    target_seq_item subc,load1,load2,branch,temp,adda,store ;
     function new(string name = "bie_sequence");
         super.new(name);
     endfunction : new
 
     task body();
-        repeat(1)
+        repeat(1000)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
             load2 = target_seq_item::type_id::create("load2"); //load register y with data dy
-            command = target_seq_item::type_id::create("command");//send add instruction (or any other instruction under test)
+            subc = target_seq_item::type_id::create("subc");//send add instruction (or any other instruction under test)
             branch = target_seq_item::type_id::create("branch");//store the result from reg z to memory location (dont care)
+            adda = target_seq_item::type_id::create("adda");//add to be annuled
+            temp = target_seq_item::type_id::create("temp");
+            store = target_seq_item::type_id::create("store");
             //nop = target_seq_item::type_id::create("nop"); 
             //opcode x=A ;
-           // $display("hello , this is the sequence,%d",command.upper_bit);
+           // $display("hello , this is the sequence,%d",subc.upper_bit);
            
-            command.ran_constrained(findOP("SUBCC")); // first randomize the instruction as an add (A is the enum code for add)
-            //nop.ran_constrained(NOP);
-            command.setup();//set up the instruction format fields 
-            if ($isunknown(command.rs1))
+            subc.ran_constrained(findOP("SUBCC")); // first randomize the instruction as an add (A is the enum code for add)
+            subc.setup();//set up the instruction format fields 
+
+
+            if ($isunknown(subc.rs1))
                 load1.load(0);
             else
             begin
-                load1.load(command.rs1);//specify regx address
-                load1.rd=command.rs1;
+                load1.load(subc.rs1);//specify regx address
+                load1.rd=subc.rs1;
             end
-            if ($isunknown(command.rs2))
+            if ($isunknown(subc.rs2))
                 load2.load(0);
             else
             begin
-                load2.load(command.rs2);//specify regx address  
-                load2.rd=command.rs2;
+                load2.load(subc.rs2);//specify regx address  
+                load2.rd=subc.rs2;
             end 
-            //store.store(command.rd);//specify regz address
+            //store.store(subc.rd);//specify regz address
+            //load1.data = 32'h2;
+            //load2.data = 32'h2;
+
+            store.store(subc.rd);
+
             branch.ran_constrained(findOP("BIEF"));
-            load1.data = 32'h1;
-            load2.data = 32'h1;
+            branch.setup();
+
+            adda.ran_constrained(findOP("A"));
+            adda.inst[RS1U:RS1L]=subc.rs1;
+            adda.inst[RS2U:RS2L]=subc.rs2;
+            adda.inst[RDU:RDL]=subc.rd;
+            adda.setup();
+
+
+            //start of sequence
 
 
             resetSeq();
@@ -54,15 +71,24 @@ class bie_sequence extends GUVM_sequence;
             
             genNop(5,load2.data);
             
-            send(command);
+            send(subc);
             
             genNop(5,0);
             
             send(branch);
+            
+            
+
+            send(adda);
+
             genNop(10,0);
+
+            send(store);
+            send(store);
             
 
             genNop(5,0);
+            
             temp = copy(branch);
             temp.SOM = SB_VERIFICATION_MODE ; 
             send(temp);

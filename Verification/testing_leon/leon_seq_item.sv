@@ -119,7 +119,7 @@ class target_seq_item extends GUVM_sequence_item;
                             ay.cond = inst[28:25];
                             ay.disp22 = inst[21:0];
                             ay.simm = {{10{inst[21]}},inst[21:0]};
-                            ay.zimm = {{10{0}},inst[21:0]};
+							ay.zimm = {{10{0}},inst[21:0]};
                         end
                     default: uvm_report_error("k.instruction", "k.instruction format not defined");
                 endcase
