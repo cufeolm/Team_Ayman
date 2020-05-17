@@ -20,3 +20,4 @@
 `include "biltr.svh"
 `include "bigtoeru.svh"
 `include "biltru.svh"
+`include "load_from_alternate_space.svh"

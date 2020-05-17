@@ -170,7 +170,7 @@ interface GUVM_interface(input  clk );
 
     // initializing the core
     task set_Up();
-        send_data(32'h100);
+        //send_data(32'h100);
         send_inst(32'h01000000);
 		pciclk = 1'b0;
         pcirst = 1'b0;

@@ -4,8 +4,9 @@ add wave vsim:/top/bfm/allow_pseudo_clk
 add wave vsim:/top/bfm/clk_pseudo
 add wave vsim:/top/dut/ici.rpc 
 add wave vsim:/top/dut/ico.data 
-add wave vsim:/top/dut/dci.maddress 
-add wave vsim:/top/bfm/receive_data/*
+add wave vsim:/top/dut/dci.maddress
+add wave vsim:/top/dut/dco
+vsim:/top/dut/rf0/inf/u0/rfss/u0/rfd 
 add wave vsim:/top/dut/dci 
 
 add wave -r /top/dut/*

@@ -89,6 +89,7 @@ please choose which instruction to simulate:
 4- branch if less than or equal reg-reg signed (based on RISC-v ISA): enter --> BILTR
 5- branch if greater than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BIGTOERU
 6- branch if less than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BILTRU
+7- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -104,6 +105,8 @@ DUT: """;
 			z=("BIGTOERU")
 		elif z == "6":
 			z=("BILTRU")
+		elif z == "7":
+			z=("LWFAS")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":
 		y=("subcc_test")

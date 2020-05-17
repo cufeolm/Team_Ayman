@@ -92,11 +92,14 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"test":begin // temp instruction 
 					verify_test(cmd_trans,res_trans,hist_trans);
 				end
-				"Jal":begin // Jump and link
+				"Jal":begin 
 					verify_JumpAndLink(cmd_trans,res_trans,hist_trans);
 				end
-				"Load":begin // Jump and link
+				"Load":begin 
 					verify_load(cmd_trans,res_trans,hist_trans);
+				end
+				"LWFAS":begin 
+					verify_load_from_alternate_space(cmd_trans,res_trans,hist_trans);
 				end
 				"Store":begin
 					verify_store(cmd_trans,res_trans,hist_trans);

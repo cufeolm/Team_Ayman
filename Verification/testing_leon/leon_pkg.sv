@@ -5,6 +5,7 @@ package target_package;
     // instructions opcodes verified in this core 
     typedef enum logic [31:0] {
         LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx,
+        LWFAS=32'b11xxxxx010000xxxxx000000000xxxxx,// load from alternate space
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
