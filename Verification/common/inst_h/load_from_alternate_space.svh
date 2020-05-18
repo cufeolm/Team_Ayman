@@ -1,10 +1,10 @@
 function void verify_load_from_alternate_space(GUVM_sequence_item cmd_trans,GUVM_result_transaction res_trans,GUVM_history_transaction hist_trans);
-bit [31:0]reg_data,i1,i2,h1,hc ;
+bit [31:0]reg_data,i1,i2,exp_res,actual_res,exp_mem_add,actual_mem_add ;
     bit [4:0]reg_add;
     bit[2:0] i;
     reg_data = cmd_trans.data;
     reg_add = cmd_trans.rd;
-    //h1= reg_data;
+    //exp_res= reg_data;
     if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
 		hist_trans.loadreg(reg_data,reg_add);
@@ -13,21 +13,27 @@ bit [31:0]reg_data,i1,i2,h1,hc ;
 	else if (cmd_trans.SOM == SB_VERIFICATION_MODE)begin
 		foreach(hist_trans.item_history[i]) begin
 			if (hist_trans.item_history[i].res_trans.result!=0) begin
-				 hc = hist_trans.item_history[i].res_trans.result ; 
+				 actual_res = hist_trans.item_history[i].res_trans.result ; 
 				//break ; 
 			end
 		end
-		h1 = hist_trans.get_reg_data(cmd_trans.rd);
-
+		foreach(hist_trans.item_history[i]) begin
+			if (hist_trans.item_history[i].res_trans.result!=0) begin
+				 actual_mem_add = hist_trans.item_history[i].res_trans.result ; 
+				break ; 
+			end
+		end
+		exp_res = hist_trans.get_reg_data(cmd_trans.rd);
+		exp_mem_add = hist_trans.get_reg_data(cmd_trans.rs1)+hist_trans.get_reg_data(cmd_trans.rs2);;
 		
-		$display ("h1=%0d", h1);
-		if((h1) == (hc))
+		$display ("exp_res=%0d", exp_res);
+		if((exp_res == actual_res) && (exp_mem_add == actual_mem_add))
 		begin
-			`uvm_info ("load_from_alternate_space_PASS", $sformatf("DUT Calculation=%0d SB Calculation=%0d ", hc, h1), UVM_LOW)
+			`uvm_info ("load_from_alternate_space_PASS", $sformatf("DUT result Calculation=%0d SB result Calculation=%0d DUT mem_add Calculation=%0d SB mem_add Calculation=%0d ",actual_res,exp_res,actual_mem_add,exp_mem_add), UVM_LOW)
 		end
 		else
 		begin
-			`uvm_error("load_from_alternate_space_FAIL", $sformatf("DUT Calculation=%0d SB Calculation=%0d ", hc, h1))
+			`uvm_error("load_from_alternate_space_FAIL", $sformatf("DUT result Calculation=%0d SB result Calculation=%0d DUT mem_add Calculation=%0d SB mem_add Calculation=%0d ",actual_res,exp_res,actual_mem_add,exp_mem_add))
 		end
 	end
 
