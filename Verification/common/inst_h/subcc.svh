@@ -2,8 +2,9 @@ function void verify_subcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction 
     bit [31:0]i1,i2,hc ;
     bit [32:0] h1 ; 
     i1 = hist_trans.get_reg_data(cmd_trans.rs1); 
-	i2 = hist_trans.get_reg_data(cmd_trans.rs2); 
-	h1 = i1 - i2 ;
+	i2 = -1 *  hist_trans.get_reg_data(cmd_trans.rs2); 
+	h1 = i1 + i2 ;
+	
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
 	begin	
         hist_trans.carry=h1[32];
@@ -11,6 +12,8 @@ function void verify_subcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction 
 		hist_trans.zero = (h1[31:0]==0);
 		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
 		hist_trans.overflow = (i1[31]&&i2[31]&&(~h1[31])) || ((~i1[31])&&(~i2[31])&&(h1[31]));
+
+		$display("holaaaaaaaaaaaaa3a33a3a %d,CARRY = %d",h1,hist_trans.carry);
     end
     
     else if (cmd_trans.SOM == SB_VERIFICATION_MODE)

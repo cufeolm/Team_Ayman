@@ -62,7 +62,7 @@ please choose which test to simulate:
 3- bie_test (based on sparcv8 ISA): enter --> 3
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
-6- subcc_test (sparc v8): enter --> 6
+6- bief_test (sparc v8): enter --> 6
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -81,6 +81,8 @@ DUT: """;
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	elif g == "5":
 		y=("python_test")
+	elif g == "6":
+		y=("bief_test")
 		s="""
 please choose which instruction to simulate:
 1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
@@ -96,7 +98,11 @@ please choose which instruction to simulate:
 11- Load word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LWMA
 12- Load word reg-imm (based on Sparcv8 ISA): enter --> LW
 13- Load double word reg-imm (based on Sparcv8 ISA): enter --> LDW
-12- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
+14- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
+15- branch if equal flag (based on sparc-v8 ISA): enter --> BIEF
+16- branch if Negative flag (based on sparc-v8 ISA): enter --> BNEGF
+17- branch if carry flag (based on sparc-v8 ISA): enter --> BCSF
+18- branch if overflow flag (based on sparc-v8 ISA): enter --> BVSF
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -126,8 +132,16 @@ DUT: """;
 			z=("LW")
 		elif z == "13":
 			z=("LDW")
-		elif z == "12":
+		elif z == "14":
 			z=("LWFAS")
+		elif z == "15":
+			z=("BIEF")
+		elif z == "16":
+			z=("BNEGF")
+		elif z == "17":
+			z=("BCSF")
+		elif z == "18":
+			z=("BVSF")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":
 		y=("subcc_test")

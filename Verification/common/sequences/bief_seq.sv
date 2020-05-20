@@ -1,15 +1,15 @@
 
 //generates the sequence of instructions needed to test an add instruction 
 
-class bie_sequence extends GUVM_sequence;
-    `uvm_object_utils(bie_sequence);
+class bief_sequence extends GUVM_sequence;
+    `uvm_object_utils(bief_sequence);
     target_seq_item subc,load1,load2,branch,temp,adda,store ;
-    function new(string name = "bie_sequence");
+    function new(string name = "bief_sequence");
         super.new(name);
     endfunction : new
 
     task body();
-        repeat(1000)
+        repeat(100)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
@@ -47,7 +47,11 @@ class bie_sequence extends GUVM_sequence;
 
             store.store(subc.rd);
 
-            branch.ran_constrained(findOP("BIEF"));
+            //branch.ran_constrained(findOP("BIEF"));
+            //branch.ran_constrained(findOP("BCSF"));
+            //branch.ran_constrained(findOP("BNEGF"));
+            //branch.ran_constrained(findOP("BVSF"));
+            branch.ran_constrained(findOP(clp_inst));
             branch.setup();
 
             adda.ran_constrained(findOP("A"));
@@ -84,7 +88,7 @@ class bie_sequence extends GUVM_sequence;
             genNop(10,0);
 
             send(store);
-            send(store);
+            send(copy(store));
             
 
             genNop(5,0);
@@ -100,5 +104,5 @@ class bie_sequence extends GUVM_sequence;
     endtask : body
 
 
-endclass : bie_sequence
+endclass : bief_sequence
 
