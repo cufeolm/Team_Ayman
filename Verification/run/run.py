@@ -81,8 +81,6 @@ DUT: """;
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
 	elif g == "5":
 		y=("python_test")
-	elif g == "6":
-		y=("bief_test")
 		s="""
 please choose which instruction to simulate:
 1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
@@ -99,10 +97,6 @@ please choose which instruction to simulate:
 12- Load word reg-imm (based on Sparcv8 ISA): enter --> LW
 13- Load double word reg-imm (based on Sparcv8 ISA): enter --> LDW
 14- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
-15- branch if equal flag (based on sparc-v8 ISA): enter --> BIEF
-16- branch if Negative flag (based on sparc-v8 ISA): enter --> BNEGF
-17- branch if carry flag (based on sparc-v8 ISA): enter --> BCSF
-18- branch if overflow flag (based on sparc-v8 ISA): enter --> BVSF
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -134,13 +128,25 @@ DUT: """;
 			z=("LDW")
 		elif z == "14":
 			z=("LWFAS")
-		elif z == "15":
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "6":
+		y=("bief_test")
+		s="""
+please choose which instruction to simulate:
+1- branch if equal flag (based on sparc-v8 ISA): enter --> BIEF
+2- branch if Negative flag (based on sparc-v8 ISA): enter --> BNEGF
+3- branch if carry flag (based on sparc-v8 ISA): enter --> BCSF
+4- branch if overflow flag (based on sparc-v8 ISA): enter --> BVSF
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
 			z=("BIEF")
-		elif z == "16":
+		elif z == "2":
 			z=("BNEGF")
-		elif z == "17":
+		elif z == "3":
 			z=("BCSF")
-		elif z == "18":
+		elif z == "4":
 			z=("BVSF")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":
