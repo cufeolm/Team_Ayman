@@ -98,6 +98,24 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"Load":begin 
 					verify_load(cmd_trans,res_trans,hist_trans);
 				end
+				"LSBMA":begin 
+					verify_load_s_byte_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"LSHMA":begin 
+					verify_load_s_half_word_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"LUBMA":begin 
+					verify_load_u_byte_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"LUHMA":begin 
+					verify_load_u_half_word_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"LWMA":begin 
+					verify_load_word_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"LW":begin 
+					verify_load_word(cmd_trans,res_trans,hist_trans);
+				end
 				"LWFAS":begin 
 					verify_load_from_alternate_space(cmd_trans,res_trans,hist_trans);
 				end
@@ -155,7 +173,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"SUBCC":begin
 					verify_subcc(cmd_trans,res_trans,hist_trans);
 				end
-				default:`uvm_fatal("instruction fail", $sformatf("instruction is not found its %h %s", si_a[i],si_a[i].name))
+				default:`uvm_fatal("instruction fail", $sformatf("instruction is not found and its %h %s", si_a[i],si_a[i].name))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();
 			$display("-------------------------------");

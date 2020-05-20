@@ -18,8 +18,8 @@ bit [31:0]reg_data,i1,i2,exp_res,actual_res,exp_mem_add,actual_mem_add ;
 			end
 		end
 		foreach(hist_trans.item_history[i]) begin
-			if (hist_trans.item_history[i].res_trans.result!=0) begin
-				 actual_mem_add = hist_trans.item_history[i].res_trans.result ; 
+			if (hist_trans.item_history[i].res_trans.mem_add!=0) begin
+				 actual_mem_add = hist_trans.item_history[i].res_trans.mem_add ; 
 				break ; 
 			end
 		end

@@ -148,7 +148,7 @@ interface GUVM_interface(input  clk );
       command_monitor_h.write_to_cmd_monitor(cmd);
     endfunction
     function void update_result_monitor();
-      result_monitor_h.write_to_monitor(data_wdata_o,next_pc);
+      result_monitor_h.write_to_monitor(data_wdata_o,data_addr_o);
     endfunction
     // reveiving data from the DUT
     function logic [31:0] receive_data();

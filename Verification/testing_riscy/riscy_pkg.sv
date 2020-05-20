@@ -7,6 +7,10 @@ package target_package;
 		//LW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
 		A = 32'b0000000xxxxxxxxxx000xxxxx0110011,
 		//SW = 32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
+		LSBMA=32'bxxxxxxxxxxxxxxxxx000xxxxx0000011, // load signed byte with misalignment feat. reg-imm (riscy)
+		LSHMA=32'bxxxxxxxxxxxxxxxxx001xxxxx0000011, // load signed half with misalignment feat. word reg-imm
+		LUBMA=32'bxxxxxxxxxxxxxxxxx100xxxxx0000011, // load unsigned byte with misalignment feat. reg-imm
+		LUHMA=32'bxxxxxxxxxxxxxxxxx101xxxxx0000011, // load unsigned half with misalignment feat. word reg-imm
 		NOP =32'h0000001B ,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 		BIGTOER=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,// branch if greater than or equal reg-reg (signed)
@@ -16,9 +20,17 @@ package target_package;
 		Jalr=32'bxxxxxxxxxxxxxxxxx000xxxxx1100111,// jump and link register-imm
 		BIER=32'bxxxxxxxxxxxxxxxxx000xxxxx1100011,// branch if equal reg-reg
 		Store =32'b0000000xxxxx00000010000000100011,
-        Load = 32'b00000000000000000010xxxxx0000011
+        Load = 32'b00000000000000000010xxxxx0000011,
+		LWMA= 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011 // load word with misalignment feat. reg-imm
 	} opcode;
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
+	//INSTRUCTION FORMAT 
+    parameter RDU = 11;
+    parameter   RDL = 7;
+    parameter   RS1U = 19;
+    parameter   RS1L = 15;
+    parameter   RS2U = 24;
+    parameter   RS2L = 20;
 
 	opcode si_a [];	// opcodes array to store enums so we can randomize and use them
     integer supported_instructions;	 // number of instructions in the array
@@ -62,4 +74,12 @@ package target_package;
 			end
 	   endfunction : xis1
 
+		function opcode findOP(string s);//returns the op code corresponding to string s from package
+            foreach(si_a[i]) // supported instruction is number of instructions in opcodes array of the core
+            begin
+                if(si_a[i].name == s) return si_a[i] ;
+            end
+            $display("couldnt find %s inside instruction package",s);
+            return NOP ; 
+        endfunction
 endpackage

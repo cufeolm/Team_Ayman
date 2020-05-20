@@ -89,7 +89,14 @@ please choose which instruction to simulate:
 4- branch if less than or equal reg-reg signed (based on RISC-v ISA): enter --> BILTR
 5- branch if greater than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BIGTOERU
 6- branch if less than or equal reg-reg unsigned (based on RISC-v ISA): enter --> BILTRU
-7- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
+7- Load signed byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LSBMA
+8- Load signed half with misalignment feat. word reg-imm (based on RISC-v ISA): enter --> LSHMA
+9- Load signed byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LUBMA
+10- Load signed half with misalignment feat. word reg-imm (based on RISC-v ISA): enter --> LUHMA
+11- Load word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LWMA
+12- Load word reg-imm (based on Sparcv8 ISA): enter --> LW
+13- Load double word reg-imm (based on Sparcv8 ISA): enter --> LDW
+12- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -106,6 +113,20 @@ DUT: """;
 		elif z == "6":
 			z=("BILTRU")
 		elif z == "7":
+			z=("LSB")
+		elif z == "8":
+			z=("LSH")
+		elif z == "9":
+			z=("LUB")
+		elif z == "10":
+			z=("LUH")
+		elif z == "11":
+			z=("LWMA")
+		elif z == "12":
+			z=("LW")
+		elif z == "13":
+			z=("LDW")
+		elif z == "12":
 			z=("LWFAS")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":

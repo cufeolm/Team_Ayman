@@ -7,7 +7,7 @@ package riscy_package;
 								LUB=32'bxxxxxxxxxxxxxxxxx100xxxxx0000011,
 								LUH=32'bxxxxxxxxxxxxxxxxx101xxxxx0000011,
 								LW= 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011,
-								LUW=32'bxxxxxxxxxxxxxxxxx110xxxxx0000011,
+								LUW=32'bxxxxxxxxxxxxxxxxx110xxxxx0000011, // for 64 bit not for us
 								LDW=32'bxxxxxxxxxxxxxxxxx000xxxxx0000011,
 								LSBfAs=32'b0000000xxxxxxxxxx111xxxxx0000011,
 								LSHfAs=32'b0001000xxxxxxxxxx111xxxxx0000011,

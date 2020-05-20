@@ -8,7 +8,7 @@ add wave vsim:/top/dut/ici.rpc
 add wave vsim:/top/dut/ico.data 
 add wave vsim:/top/dut/dci.maddress
 add wave vsim:/top/dut/dco
-vsim:/top/dut/rf0/inf/u0/rfss/u0/rfd 
+add wave vsim:/top/dut/rf0/inf/u0/rfss/u0/rfd 
 add wave vsim:/top/dut/dci 
 
 add wave -r /top/dut/*

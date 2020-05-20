@@ -4,8 +4,17 @@ package target_package;
     
     // instructions opcodes verified in this core 
     typedef enum logic [31:0] {
-        LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx,
-        LWFAS=32'b11xxxxx010000xxxxx000000000xxxxx,// load from alternate space
+        LSBMA=32'b11xxxxx001001xxxxx1xxxxxxxxxxxxx, // load signed byte with misalignment feat. reg-imm
+        LSH=32'b11xxxxx001010xxxxx1xxxxxxxxxxxxx, // load signed half word reg-imm
+        LUB=32'b11xxxxx000001xxxxx1xxxxxxxxxxxxx, // load unsigned byte reg-imm
+        LUH=32'b11xxxxx000010xxxxx1xxxxxxxxxxxxx, // load unsigned half word reg-imm
+        LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx, // load double word reg-imm
+        LWFAS=32'b11xxxxx010000xxxxx0xxxxxxxxxxxxx, // load word reg-reg (from alternate space)
+        LDFAS=32'b11xxxxx010011xxxxx0xxxxxxxxxxxxx, // load double word reg-reg
+        LSBFAS=32'b11xxxxx011001xxxxx000001010xxxxx, // load signed byte reg-reg
+        LSHFAS=32'b11xxxxx011010xxxxx0xxxxxxxxxxxxx, // load signed half word reg-reg
+        LUBFAS=32'b11xxxxx010001xxxxx0xxxxxxxxxxxxx, // load unsigned byte reg-reg
+        LUHFAS=32'b11xxxxx010010xxxxx0xxxxxxxxxxxxx, // load unsigned half word reg-reg
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
@@ -24,7 +33,8 @@ package target_package;
         BA= 32'b00x1000010xxxxxxxxxxxxxxxxxxxxxx,
         //BIEF=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
-        Load = 32'b11xxxxx0000000000010000000000000
+        Load = 32'b11xxxxx0000000000010000000000000,
+        LW= 32'b11xxxxx000000xxxxx1xxxxxxxxxxxxx // load word reg-imm
     } opcode;
     
     //INSTRUCTION FORMAT 

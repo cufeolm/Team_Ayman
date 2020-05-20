@@ -54,8 +54,9 @@ class python_sequence extends GUVM_sequence ;
             store.store(command.rd);//specify regz address  
         end 
         resetSeq();
-        // load1.data=32'h000000002;
+        //load1.data=32'h00000004;
         // load2.data=32'h000000002;
+        // command.data= {{24{1'bx}},{command.data[7:0]}} ;
         //send the sequence
         send(load1);
         
