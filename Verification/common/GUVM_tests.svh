@@ -1,6 +1,6 @@
 `include "GUVM_test.sv"
 `include"add_test.sv"
-`include"bie_test.sv"
+`include"bief_test.sv"
 `include"child_test.sv"
 `include"python_test.sv"
 `include"subcc_test.sv"
