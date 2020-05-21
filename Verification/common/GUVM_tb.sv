@@ -27,3 +27,4 @@
 `include "luhma.svh"
 `include "lwma.svh"
 `include "lw.svh"
+`include"rdpsr.svh"
