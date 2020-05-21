@@ -6,6 +6,7 @@
 `include "nop.svh"
 `include "addcc.svh"
 `include "addx.svh"
+`include "addxcc.svh"
 `include "bief.svh"
 `include "bier.svh"
 `include "bvsf.svh"

@@ -4,3 +4,4 @@
 `include"child_test.sv"
 `include"python_test.sv"
 `include"subcc_test.sv"
+`include"addxcc_test.sv"

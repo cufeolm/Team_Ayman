@@ -11,7 +11,7 @@ class subcc_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(1000)
+        repeat(100)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
@@ -25,7 +25,10 @@ class subcc_sequence extends GUVM_sequence ;
             //opcode x=A ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
             
-            command.ran_constrained(findOP("SUBCC")); // first randomize the instruction as an add (A is the enum code for add)
+            //command.ran_constrained(findOP("SUBCC")); // first randomize the instruction as an add (A is the enum code for add)
+            //command.ran_constrained(findOP("ADDCC"));
+            //command.ran_constrained(findOP("A"));
+            command.ran_constrained(findOP("A"));
 
             command.setup();//set up the instruction format fields 
             

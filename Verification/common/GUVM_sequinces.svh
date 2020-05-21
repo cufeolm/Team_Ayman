@@ -4,3 +4,4 @@
 `include"add_seq.sv"
 `include"bief_seq.sv"
 `include"subcc_seq.sv"
+`include"addxcc_sequence.sv"

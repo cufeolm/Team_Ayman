@@ -63,6 +63,7 @@ please choose which test to simulate:
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
 6- bief_test (sparc v8): enter --> 6
+7- ADDXCC_test (sparc and riscy) -->7
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -149,9 +150,26 @@ DUT: """;
 		elif z == "4":
 			z=("BVSF")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "6":
-		y=("subcc_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
+	elif g == "7":
+		y=("addxcc_test")
+		s="""
+please choose which instruction to simulate:
+1- branch if equal flag (based on sparc-v8 ISA): enter --> add
+2- branch if Negative flag (based on sparc-v8 ISA): enter --> addcc
+3- branch if carry flag (based on sparc-v8 ISA): enter --> addx
+4- branch if overflow flag (based on sparc-v8 ISA): enter --> addxcc
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("A")
+		elif z == "2":
+			z=("ADDCC")
+		elif z == "3":
+			z=("ADDX")
+		elif z == "4":
+			z=("ADDXCC")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
 		break

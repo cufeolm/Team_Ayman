@@ -176,6 +176,9 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"RDPSR":begin
 					verify_rdpsr(cmd_trans,res_trans,hist_trans);
 				end
+				"ADDXCC":begin
+					verify_addxcc(cmd_trans,res_trans,hist_trans);
+				end
 				default:`uvm_fatal("instruction fail", $sformatf("instruction is not found and its %h %s", si_a[i],si_a[i].name))
 			endcase
 			if(cmd_trans.SOM==SB_VERIFICATION_MODE)hist_trans.printItems();

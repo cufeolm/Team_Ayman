@@ -18,6 +18,7 @@ package target_package;
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
+        ADDXCC=32'b10xxxxx011000xxxxx000000000xxxxx,
         Ai=32'b10xxxxx000000xxxxx1xxxxxxxxxxxxx,
         Jalr_cpc=32'b10xxxxx111000xxxxx10000000001100,
         Jalrr=32'b10xxxxx111000xxxxx000000000xxxxx,
