@@ -127,6 +127,7 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				end
 				"LUBMARR":begin 
 					verify_load_u_byte_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
 				"LUHMARR":begin 
 					verify_load_u_half_word_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
 				end
