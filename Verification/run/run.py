@@ -64,7 +64,7 @@ please choose which test to simulate:
 5- python_test (prototype): enter --> 5
 6- bief_test (sparc v8): enter --> 6
 7- load_double_test (sparc v8): enter --> 7
-7- ADDXCC_test (sparc and riscy) -->7
+7- ADDXCC_test (sparc and riscy) -->8
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -175,7 +175,15 @@ DUT: """;
 please choose which instruction to simulate:
 1- load double word (based on sparc-v8 ISA): enter --> LDD
 2- load double word reg-reg (based on sparc-v8 ISA): enter --> LDDRR
-	elif g == "7":
+any other input will simulate no operation or make an error in the simulation
+DUT: """
+		z=raw_input(s)
+		if z == "1":
+			z=("LDD")
+		elif z == "2":
+			z=("LDDRR")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "8":
 		y=("addxcc_test")
 		s="""
 please choose which instruction to simulate:
