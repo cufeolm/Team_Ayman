@@ -2,7 +2,7 @@ class subcc_test extends GUVM_test;
     `uvm_component_utils(subcc_test);
 
     
-    function new(string name = "add_test", uvm_component parent);
+    function new(string name = "subcc_test", uvm_component parent);
         super.new(name, parent);
     endfunction: new
 

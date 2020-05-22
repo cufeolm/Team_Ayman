@@ -11,7 +11,7 @@ function void verify_load_s_byte_misaligned(GUVM_sequence_item cmd_trans,GUVM_re
 		case (caseop[1:0])
 			2'b00:reg_data = {{24{cmd_trans.data[7]}},{cmd_trans.data[7:0]}};
 			2'b01:reg_data = {{24{cmd_trans.data[15]}},{cmd_trans.data[15:8]}};
-			2'b10:reg_data = {{24{cmd_trans.data[24]}},{cmd_trans.data[23:16]}};
+			2'b10:reg_data = {{24{cmd_trans.data[23]}},{cmd_trans.data[23:16]}};
 			2'b11:reg_data = {{24{cmd_trans.data[31]}},{cmd_trans.data[31:24]}};
 		endcase
    		reg_add = cmd_trans.rd;

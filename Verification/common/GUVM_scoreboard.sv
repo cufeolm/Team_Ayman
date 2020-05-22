@@ -116,8 +116,28 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"LW":begin 
 					verify_load_word(cmd_trans,res_trans,hist_trans);
 				end
-				"LWFAS":begin 
-					verify_load_from_alternate_space(cmd_trans,res_trans,hist_trans);
+				"LWRR":begin 
+					verify_load_word_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"LSBMARR":begin 
+					verify_load_s_byte_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"LSHMARR":begin 
+					verify_load_s_half_word_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"LUBMARR":begin 
+					verify_load_u_byte_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				"LUHMARR":begin 
+					verify_load_u_half_word_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"LWMARR":begin 
+					verify_load_word_misaligned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"LDD":begin 
+					verify_load_double_word(cmd_trans,res_trans,hist_trans);
+				end
+				"LDDRR":begin 
+					verify_load_double_word_reg_reg(cmd_trans,res_trans,hist_trans);
 				end
 				"Store":begin
 					verify_store(cmd_trans,res_trans,hist_trans);

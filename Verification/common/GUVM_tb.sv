@@ -20,10 +20,17 @@
 `include "biltr.svh"
 `include "bigtoeru.svh"
 `include "biltru.svh"
-`include "load_from_alternate_space.svh"
+`include "lwrr.svh"
 `include "lsbma.svh"
 `include "lshma.svh"
 `include "lubma.svh"
 `include "luhma.svh"
 `include "lwma.svh"
 `include "lw.svh"
+`include "lsbmarr.svh" // riscy extension instruction
+`include "lshmarr.svh" // riscy extension instruction
+`include "lubmarr.svh" // riscy extension instruction
+`include "luhmarr.svh" // riscy extension instruction
+`include "lwmarr.svh" // riscy extension instruction
+`include "ldd.svh"
+`include "lddrr.svh"

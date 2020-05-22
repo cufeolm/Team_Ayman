@@ -38,11 +38,4 @@ function void verify_load_word(GUVM_sequence_item cmd_trans,GUVM_result_transact
 			`uvm_error("load_word_FAIL", $sformatf("DUT result Calculation=%0d SB result Calculation=%0d DUT mem_add Calculation=%0d SB mem_add Calculation=%0d ",actual_res,exp_res,actual_mem_add,exp_mem_add))
 		end
 	end
-
-
-
-
-
-
-
 endfunction

@@ -6,15 +6,15 @@ package target_package;
     typedef enum logic [31:0] {
         LSBMA=32'b11xxxxx001001xxxxx1xxxxxxxxxxxxx, // load signed byte with misalignment feat. reg-imm
         LSH=32'b11xxxxx001010xxxxx1xxxxxxxxxxxxx, // load signed half word reg-imm
-        LUB=32'b11xxxxx000001xxxxx1xxxxxxxxxxxxx, // load unsigned byte reg-imm
+        LUBMA=32'b11xxxxx000001xxxxx1xxxxxxxxxxxxx, // load unsigned byte with misalignment feat. reg-imm
         LUH=32'b11xxxxx000010xxxxx1xxxxxxxxxxxxx, // load unsigned half word reg-imm
-        LDW= 32'b11xxxxx000011xxxxx1xxxxxxxxxxxxx, // load double word reg-imm
-        LWFAS=32'b11xxxxx010000xxxxx0xxxxxxxxxxxxx, // load word reg-reg (from alternate space)
-        LDFAS=32'b11xxxxx010011xxxxx0xxxxxxxxxxxxx, // load double word reg-reg
-        LSBFAS=32'b11xxxxx011001xxxxx000001010xxxxx, // load signed byte reg-reg
-        LSHFAS=32'b11xxxxx011010xxxxx0xxxxxxxxxxxxx, // load signed half word reg-reg
-        LUBFAS=32'b11xxxxx010001xxxxx0xxxxxxxxxxxxx, // load unsigned byte reg-reg
-        LUHFAS=32'b11xxxxx010010xxxxx0xxxxxxxxxxxxx, // load unsigned half word reg-reg
+        LDD= 32'b1100010000011xxxxx10000000000110, // load double word reg-imm
+        LWRR=32'b11xxxxx010000xxxxx0xxxxxxxxxxxxx, // load word reg-reg (from alternate space)
+        LDDRR=32'b1100010010011xxxxx0xxxxxxxxxxxxx, // load double word reg-reg
+        LSBMARR=32'b11xxxxx011001xxxxx000001010xxxxx, // load signed byte reg-reg
+        LSHRR=32'b11xxxxx011010xxxxx0xxxxxxxxxxxxx, // load signed half word reg-reg
+        LUBRR=32'b11xxxxx010001xxxxx0xxxxxxxxxxxxx, // load unsigned byte reg-reg
+        LUHRR=32'b11xxxxx010010xxxxx0xxxxxxxxxxxxx, // load unsigned half word reg-reg
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,

@@ -63,6 +63,7 @@ please choose which test to simulate:
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
 6- bief_test (sparc v8): enter --> 6
+7- load_double_test (sparc v8): enter --> 7
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -96,7 +97,12 @@ please choose which instruction to simulate:
 11- Load word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LWMA
 12- Load word reg-imm (based on Sparcv8 ISA): enter --> LW
 13- Load double word reg-imm (based on Sparcv8 ISA): enter --> LDW
-14- Load from alternate space reg-reg (based on Sparcv8 ISA): enter --> LWFAS
+14- Load word reg-reg (based on Sparcv8 ISA): enter --> LWRR
+15- Load signed byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LSBMARR #riscy extension instruction
+16- Load signed half with misalignment feat. word reg-imm (based on RISC-v ISA): enter --> LSHMARR #riscy extension instruction
+17- Load signed byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LUBMARR #riscy extension instruction
+18- Load signed half with misalignment feat. word reg-imm (based on RISC-v ISA): enter --> LUHMARR #riscy extension instruction
+19- Load word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LWMARR #riscy extension instruction
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -113,13 +119,13 @@ DUT: """;
 		elif z == "6":
 			z=("BILTRU")
 		elif z == "7":
-			z=("LSB")
+			z=("LSBMA")
 		elif z == "8":
-			z=("LSH")
+			z=("LSHMA")
 		elif z == "9":
-			z=("LUB")
+			z=("LUBMA")
 		elif z == "10":
-			z=("LUH")
+			z=("LUHMA")
 		elif z == "11":
 			z=("LWMA")
 		elif z == "12":
@@ -127,7 +133,17 @@ DUT: """;
 		elif z == "13":
 			z=("LDW")
 		elif z == "14":
-			z=("LWFAS")
+			z=("LWRR")
+		elif z == "15":
+			z=("LSBMARR")
+		elif z == "16":
+			z=("LSHMARR")
+		elif z == "17":
+			z=("LUBMARR")
+		elif z == "18":
+			z=("LUHMARR")
+		elif z == "19":
+			z=("LWMARR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	elif g == "6":
 		y=("bief_test")
@@ -152,6 +168,20 @@ DUT: """;
 	elif g == "6":
 		y=("subcc_test")
 		os.system(x+y+"; log /* -r ; run -all ; quit\"")
+	elif g == "7":
+		y=("load_double_test")
+		s="""
+please choose which instruction to simulate:
+1- load double word (based on sparc-v8 ISA): enter --> LDD
+2- load double word reg-reg (based on sparc-v8 ISA): enter --> LDDRR
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("LDD")
+		elif z == "2":
+			z=("LDDRR")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
 		break

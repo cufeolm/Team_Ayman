@@ -128,13 +128,25 @@ class target_seq_item extends GUVM_sequence_item;
 				end
 			I_type, I_type1:
 				begin
-					//I-type
-					ay.immb11_0 = inst[31:20];
-					ay.rs1 = inst[19:15];
-					ay.funct3 = inst[14:12];
-					ay.rd = inst[11:7];
-					ay.simm = {{20{inst[31]}},inst[31:20]};
-					ay.zimm = {{20{0}},inst[31:20]};
+					if (inst[14:12] == 3'b111)
+					begin
+						//load R-type in riscy extensions
+						ay.funct7 = inst[31:25];
+						ay.rs2 = inst[24:20];
+						ay.rs1 = inst[19:15];
+						ay.funct3 = inst[14:12];
+						ay.rd = inst[11:7];
+					end
+					else
+					begin
+						//I-type
+						ay.immb11_0 = inst[31:20];
+						ay.rs1 = inst[19:15];
+						ay.funct3 = inst[14:12];
+						ay.rd = inst[11:7];
+						ay.simm = {{20{inst[31]}},inst[31:20]};
+						ay.zimm = {{20{0}},inst[31:20]};
+					end
 				end
 			I_type_shift:
 				begin
