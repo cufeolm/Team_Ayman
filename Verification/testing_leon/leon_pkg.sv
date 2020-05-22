@@ -18,6 +18,7 @@ package target_package;
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
+        ADDXCC=32'b10xxxxx011000xxxxx000000000xxxxx,
         Ai=32'b10xxxxx000000xxxxx1xxxxxxxxxxxxx,
         Jalr_cpc=32'b10xxxxx111000xxxxx10000000001100,
         Jalrr=32'b10xxxxx111000xxxxx000000000xxxxx,
@@ -31,6 +32,8 @@ package target_package;
         BVSF = 32'b00x0111010xxxxxxxxxxxxxxxxxxxxxx,
 
         BA= 32'b00x1000010xxxxxxxxxxxxxxxxxxxxxx,
+
+        RDPSR=32'b10xxxxx101001xxxxx00000000000000,
         //BIEF=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
         Load = 32'b11xxxxx0000000000010000000000000,

@@ -64,6 +64,7 @@ please choose which test to simulate:
 5- python_test (prototype): enter --> 5
 6- bief_test (sparc v8): enter --> 6
 7- load_double_test (sparc v8): enter --> 7
+7- ADDXCC_test (sparc and riscy) -->7
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -174,6 +175,14 @@ DUT: """;
 please choose which instruction to simulate:
 1- load double word (based on sparc-v8 ISA): enter --> LDD
 2- load double word reg-reg (based on sparc-v8 ISA): enter --> LDDRR
+	elif g == "7":
+		y=("addxcc_test")
+		s="""
+please choose which instruction to simulate:
+1- branch if equal flag (based on sparc-v8 ISA): enter --> add
+2- branch if Negative flag (based on sparc-v8 ISA): enter --> addcc
+3- branch if carry flag (based on sparc-v8 ISA): enter --> addx
+4- branch if overflow flag (based on sparc-v8 ISA): enter --> addxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -181,6 +190,13 @@ DUT: """;
 			z=("LDD")
 		elif z == "2":
 			z=("LDDRR")
+			z=("A")
+		elif z == "2":
+			z=("ADDCC")
+		elif z == "3":
+			z=("ADDX")
+		elif z == "4":
+			z=("ADDXCC")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

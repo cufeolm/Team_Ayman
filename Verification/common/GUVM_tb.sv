@@ -6,6 +6,7 @@
 `include "nop.svh"
 `include "addcc.svh"
 `include "addx.svh"
+`include "addxcc.svh"
 `include "bief.svh"
 `include "bier.svh"
 `include "bvsf.svh"
@@ -34,3 +35,4 @@
 `include "lwmarr.svh" // riscy extension instruction
 `include "ldd.svh"
 `include "lddrr.svh"
+`include"rdpsr.svh"
