@@ -62,9 +62,11 @@ please choose which test to simulate:
 3- bie_test (based on sparcv8 ISA): enter --> 3
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
-6- bief_test (sparc v8): enter --> 6
-7- load_double_test (sparc v8): enter --> 7
-7- ADDXCC_test (sparc and riscy) -->8
+6- bief_test (based on sparcv8 ISA): enter --> 6
+7- load_double_test (based on sparcv8 ISA): enter --> 7
+8- ADDXCC_test (based on RISC-v ISA, Sparcv8 ISA) -->8
+9- store_test (based on RISC-v ISA, Sparcv8 ISA) -->9
+
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -193,11 +195,8 @@ please choose which instruction to simulate:
 4- branch if overflow flag (based on sparc-v8 ISA): enter --> addxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
-		z=raw_input(s)
+		z=raw_input(s)     
 		if z == "1":
-			z=("LDD")
-		elif z == "2":
-			z=("LDDRR")
 			z=("A")
 		elif z == "2":
 			z=("ADDCC")
@@ -205,6 +204,23 @@ DUT: """;
 			z=("ADDX")
 		elif z == "4":
 			z=("ADDXCC")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "9":
+		y=("store_test")
+		s="""
+please choose which instruction to simulate:
+1- store least significant byte with misalignment feat. (based on RISC-v ISA): enter --> SBMA
+2- store least significant half word with misalignment feat. (based on RISC-v ISA): enter --> SHMA
+3- store word with misalignment feat. (based on RISC-v ISA): enter --> SWMA
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("SBMA")
+		if z == "2":
+			z=("SHMA")
+		if z == "3":
+			z=("SWMA")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

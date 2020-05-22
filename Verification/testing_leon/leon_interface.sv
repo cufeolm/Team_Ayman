@@ -70,7 +70,7 @@ interface GUVM_interface(input  clk );
     endfunction
     function void update_result_monitor();
         //result_monitor_h.write_to_monitor(dcache_input.edata,next_pc);
-        result_monitor_h.write_to_monitor(dcache_input.maddress,dcache_input.maddress);
+        result_monitor_h.write_to_monitor(dcache_input.maddress,dcache_input.maddress,4'd0);
     endfunction
 
     function logic[31:0] get_cpc();

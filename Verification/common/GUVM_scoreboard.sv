@@ -143,6 +143,15 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"Store":begin
 					verify_store(cmd_trans,res_trans,hist_trans);
 				end
+				"SBMA":begin
+					verify_store_byte_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"SHMA":begin
+					verify_store_half_word_misaligned(cmd_trans,res_trans,hist_trans);
+				end
+				"SWMA":begin
+					verify_store_word_misaligned(cmd_trans,res_trans,hist_trans);
+				end
 				"NOP":begin
 					verify_nop(cmd_trans,res_trans,hist_trans);
 				end

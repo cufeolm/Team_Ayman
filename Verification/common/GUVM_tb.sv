@@ -36,3 +36,6 @@
 `include "ldd.svh"
 `include "lddrr.svh"
 `include"rdpsr.svh"
+`include "sbma.svh"
+`include "shma.svh"
+`include "swma.svh"
