@@ -16,8 +16,10 @@ package target_package;
 		LUBMARR=32'b0100000xxxxxxxxxx111xxxxx0000011, // load unsigned byte with misalignment feat. reg-reg
 		LUHMARR=32'b0101000xxxxxxxxxx111xxxxx0000011, // load unsigned half word with misalignment feat. reg-reg
 		LWMARR=32'b0010000xxxxxxxxxx111xxxxx0000011, // load word with misalignment feat. reg-reg
+
 		SBMA=32'bxxxxxxxxxxxxxxxxx000xxxxx0100011, // store least significant byte reg-imm
 		SHMA=32'bxxxxxxxxxxxxxxxxx001xxxxx0100011, // store least significant half word reg-imm
+		
 		NOP=32'h0000001B,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 		BIGTOER=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,// branch if greater than or equal reg-reg (signed)

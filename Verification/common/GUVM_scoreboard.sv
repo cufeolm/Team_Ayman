@@ -152,6 +152,24 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"SWMA":begin
 					verify_store_word_misaligned(cmd_trans,res_trans,hist_trans);
 				end
+				"SB":begin
+					verify_store_byte(cmd_trans,res_trans,hist_trans);
+				end
+				"SH":begin
+					verify_store_half_word(cmd_trans,res_trans,hist_trans);
+				end
+				"SW":begin
+					verify_store_word(cmd_trans,res_trans,hist_trans);
+				end
+				"SBRR":begin
+					verify_store_byte_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"SHRR":begin
+					verify_store_half_word_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"SWRR":begin
+					verify_store_word_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
 				"NOP":begin
 					verify_nop(cmd_trans,res_trans,hist_trans);
 				end

@@ -209,18 +209,36 @@ DUT: """;
 		y=("store_test")
 		s="""
 please choose which instruction to simulate:
-1- store least significant byte with misalignment feat. (based on RISC-v ISA): enter --> SBMA
-2- store least significant half word with misalignment feat. (based on RISC-v ISA): enter --> SHMA
-3- store word with misalignment feat. (based on RISC-v ISA): enter --> SWMA
+1- store least significant byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SBMA
+2- store least significant half word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SHMA
+3- store word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SWMA
+4- store least significant byte reg-imm (based on sparc-v8 ISA): enter --> SB
+5- store least significant half word reg-imm (based on sparc-v8 ISA): enter --> SH
+6- store word reg-imm (based on sparc-v8 ISA): enter --> SW
+7- store least significant byte reg-reg (based on sparc-v8 ISA): enter --> SBRR
+8- store least significant half word reg-reg (based on sparc-v8 ISA): enter --> SHRR
+9- store word reg-reg (based on sparc-v8 ISA): enter --> SWRR
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
 		if z == "1":
 			z=("SBMA")
-		if z == "2":
+		elif z == "2":
 			z=("SHMA")
-		if z == "3":
+		elif z == "3":
 			z=("SWMA")
+		elif z == "4":
+			z=("SB")
+		elif z == "5":
+			z=("SH")
+		elif z == "6":
+			z=("SW")
+		elif z == "7":
+			z=("SBRR")
+		elif z == "8":
+			z=("SHRR")
+		elif z == "9":
+			z=("SWRR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

@@ -11,7 +11,7 @@ class store_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(100)
+        repeat(10)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register rs1 with data dx
