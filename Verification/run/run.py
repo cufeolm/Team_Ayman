@@ -62,9 +62,11 @@ please choose which test to simulate:
 3- bie_test (based on sparcv8 ISA): enter --> 3
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
-6- bief_test (sparc v8): enter --> 6
-7- load_double_test (sparc v8): enter --> 7
-7- ADDXCC_test (sparc and riscy) -->7
+6- bief_test (based on sparcv8 ISA): enter --> 6
+7- load_double_test (based on sparcv8 ISA): enter --> 7
+8- ADDXCC_test (based on RISC-v ISA, Sparcv8 ISA) -->8
+9- store_test (based on RISC-v ISA, Sparcv8 ISA) -->9
+
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -175,7 +177,15 @@ DUT: """;
 please choose which instruction to simulate:
 1- load double word (based on sparc-v8 ISA): enter --> LDD
 2- load double word reg-reg (based on sparc-v8 ISA): enter --> LDDRR
-	elif g == "7":
+any other input will simulate no operation or make an error in the simulation
+DUT: """
+		z=raw_input(s)
+		if z == "1":
+			z=("LDD")
+		elif z == "2":
+			z=("LDDRR")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "8":
 		y=("addxcc_test")
 		s="""
 please choose which instruction to simulate:
@@ -185,11 +195,8 @@ please choose which instruction to simulate:
 4- branch if overflow flag (based on sparc-v8 ISA): enter --> addxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
-		z=raw_input(s)
+		z=raw_input(s)     
 		if z == "1":
-			z=("LDD")
-		elif z == "2":
-			z=("LDDRR")
 			z=("A")
 		elif z == "2":
 			z=("ADDCC")
@@ -197,6 +204,41 @@ DUT: """;
 			z=("ADDX")
 		elif z == "4":
 			z=("ADDXCC")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "9":
+		y=("store_test")
+		s="""
+please choose which instruction to simulate:
+1- store least significant byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SBMA
+2- store least significant half word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SHMA
+3- store word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> SWMA
+4- store least significant byte reg-imm (based on sparc-v8 ISA): enter --> SB
+5- store least significant half word reg-imm (based on sparc-v8 ISA): enter --> SH
+6- store word reg-imm (based on sparc-v8 ISA): enter --> SW
+7- store least significant byte reg-reg (based on sparc-v8 ISA): enter --> SBRR
+8- store least significant half word reg-reg (based on sparc-v8 ISA): enter --> SHRR
+9- store word reg-reg (based on sparc-v8 ISA): enter --> SWRR
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("SBMA")
+		elif z == "2":
+			z=("SHMA")
+		elif z == "3":
+			z=("SWMA")
+		elif z == "4":
+			z=("SB")
+		elif z == "5":
+			z=("SH")
+		elif z == "6":
+			z=("SW")
+		elif z == "7":
+			z=("SBRR")
+		elif z == "8":
+			z=("SHRR")
+		elif z == "9":
+			z=("SWRR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

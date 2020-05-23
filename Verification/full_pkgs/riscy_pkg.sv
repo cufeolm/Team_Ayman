@@ -19,7 +19,7 @@ package riscy_package;
 								SB=32'bxxxxxxxxxxxxxxxxx000xxxxx0100011,
 								SH=32'bxxxxxxxxxxxxxxxxx001xxxxx0100011,
 								SW=32'bxxxxxxxxxxxxxxxxx010xxxxx0100011,
-								SD=32'bxxxxxxxxxxxxxxxxx011xxxxx0100011,
+								SD=32'bxxxxxxxxxxxxxxxxx011xxxxx0100011, // for 64 bit only not for our configuration
 								M=32'b0000001xxxxxxxxxx000xxxxx0110011,
 								Mh=32'b0000001xxxxxxxxxx010xxxxx0110011,
 								Mhs=32'b0000001xxxxxxxxxx010xxxxx0110011,

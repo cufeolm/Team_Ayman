@@ -15,6 +15,15 @@ package target_package;
         LSHRR=32'b11xxxxx011010xxxxx0xxxxxxxxxxxxx, // load signed half word reg-reg
         LUBRR=32'b11xxxxx010001xxxxx0xxxxxxxxxxxxx, // load unsigned byte reg-reg
         LUHRR=32'b11xxxxx010010xxxxx0xxxxxxxxxxxxx, // load unsigned half word reg-reg
+
+        SB=32'b11xxxxx000101xxxxx1xxxxxxxxxxxxx, // store least significant byte reg-imm
+        SBRR=32'b11xxxxx010101xxxxx000001010xxxxx, // store least significant byte reg-reg
+        SH=32'b11xxxxx000110xxxxx1xxxxxxxxxxxxx, // store least significant half word reg-imm
+        SHRR=32'b11xxxxx010110xxxxx00001010xxxxxx, // store least significant half word reg-reg
+        SWRR=32'b11xxxxx010100xxxxx000001010xxxxx, // store word reg-reg
+        SD=32'b11xxxxx000111xxxxx1xxxxxxxxxxxxx, // store double word reg-imm
+        SDRR=32'b11xxxxx010111xxxxx000001010xxxxx, // store double word reg-reg
+
         A=32'b10xxxxx000000xxxxx000000000xxxxx,
         ADDCC=32'b10xxxxx010000xxxxx000000000xxxxx,
         ADDX =32'b10xxxxx001000xxxxx000000000xxxxx,
@@ -36,6 +45,7 @@ package target_package;
         RDPSR=32'b10xxxxx101001xxxxx00000000000000,
         //BIEF=32'b0010001010xxxxxxxxxxxxxxxxxxxxxx,
         Store =32'b11xxxxx0001000000010000000000000,
+        SW=32'b11xxxxx000100xxxxx1xxxxxxxxxxxxx, // store word reg-imm
         Load = 32'b11xxxxx0000000000010000000000000,
         LW= 32'b11xxxxx000000xxxxx1xxxxxxxxxxxxx // load word reg-imm
     } opcode;

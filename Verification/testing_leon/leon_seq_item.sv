@@ -30,6 +30,10 @@ class target_seq_item extends GUVM_sequence_item;
 		inst[29:25]=r;
 	endfunction
 
+	function void storeadd();//for getting address of the register with required data to be stored 
+		store_add = inst[29:25];
+	endfunction
+
 	function void load(logic [4:0] r);//for initially loading the register file only ; not for testing the laod instruction 
 		ran_constrained(Load);
 		inst[29:25]=r;

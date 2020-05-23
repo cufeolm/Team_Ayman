@@ -6,3 +6,5 @@
 `include"subcc_test.sv"
 `include"load_double_test.sv"
 `include"addxcc_test.sv"
+`include"store_test.sv"
+
