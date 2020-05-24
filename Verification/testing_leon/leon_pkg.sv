@@ -36,6 +36,7 @@ package target_package;
         SUBCC=32'b10xxxxx010100xxxxx000000000xxxxx,
 
         UMULR=32'b10xxxxx001010xxxxx000000000xxxxx,
+        UDIVR=32'b10xxxxx001110xxxxx000000000xxxxx,
 
         BIEF=32'b00x0001010xxxxxxxxxxxxxxxxxxxxxx,
         BCSF = 32'b00x0101010xxxxxxxxxxxxxxxxxxxxxx,

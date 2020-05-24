@@ -46,3 +46,4 @@
 `include "shrr.svh"
 `include "swrr.svh"
 `include "umulr.svh"
+`include "udivr.svh"
