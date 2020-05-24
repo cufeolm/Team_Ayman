@@ -45,3 +45,4 @@
 `include "sbrr.svh"
 `include "shrr.svh"
 `include "swrr.svh"
+`include "umulr.svh"

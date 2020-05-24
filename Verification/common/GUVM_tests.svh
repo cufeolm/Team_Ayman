@@ -7,4 +7,5 @@
 `include"load_double_test.sv"
 `include"addxcc_test.sv"
 `include"store_test.sv"
+`include"mul_test.sv"
 

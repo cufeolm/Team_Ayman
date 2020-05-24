@@ -7,4 +7,5 @@
 `include"load_double_seq.sv"
 `include"addxcc_sequence.sv"
 `include"store_seq.sv"
+`include"mul_sequence.sv"
 
