@@ -49,7 +49,8 @@ class mul_sequence extends GUVM_sequence ;
 
             // load1.data = load1.data&&32'h0000ffff; 
             // load2.data = load2.data &&32'h0000ffff;
-            load2.data = 5;
+            load1.data =32 ;
+            load2.data = 4;
 
             resetSeq();
 			//send the sequence
