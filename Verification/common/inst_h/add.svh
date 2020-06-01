@@ -15,7 +15,6 @@
 // 		foreach(hist_trans.item_history[i])begin
 // 			if (hist_trans.item_history[i].res_trans.result!==0) begin
 // 				 hc = hist_trans.item_history[i].res_trans.result ; 
-// 				 break ; 
 // 			end
 // 		end
 // 		//hc = res_trans.result;

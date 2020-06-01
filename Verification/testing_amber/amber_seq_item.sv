@@ -11,10 +11,10 @@ class target_seq_item extends GUVM_sequence_item;
 
 	logic [3:0] cond;
 	logic [3:0] opcode;
-	//logic [3:0] rs1;  // rn
-	//logic [3:0] rd;
+	// logic [3:0] rs1;  // rn
+	// logic [3:0] rd;
 	logic [3:0] rs;
-	//logic [3:0] rs2;    // rm
+	// logic [3:0] rs2;    // rm
 	logic [11:0] offset12;
 	logic [15:0] register_list;
 	logic [23:0] offset24;
@@ -53,8 +53,7 @@ class target_seq_item extends GUVM_sequence_item;
 	endfunction
 
 	function void storeadd();//for getting address of the register with required data to be stored 
-		store_add = inst[29:25];
-		$display("warning wrong method storeadd() inside amber seq item ");
+		store_add = inst[15:12];
 	endfunction
 
 	function void store(logic [3:0] r);//for initially storing the register file only ; not for testing the store instruction 
@@ -157,8 +156,8 @@ class target_seq_item extends GUVM_sequence_item;
                     else if (inst[24] == 1'b0)
                         begin // Multiply (MULT)
                             ay.rd = inst[19:16];
-                            ay.rs1 = inst[15:12];
-                            ay.rs = inst[11:8];
+                            ay.rs = inst[15:12];
+                            ay.rs1 = inst[11:8];
                             ay.rs2 = inst[3:0];
                             ay.s = inst[20];
                             ay.a = inst[21];

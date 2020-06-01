@@ -2,27 +2,52 @@ package target_package;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
 
-    // instructions opcodes verified in this core 
+    // instructions opcodes verified in  this core 
     typedef enum logic[31:0] { 
-        //LW = 32'b111101101001xxxxxxxxxxxxxxxxxxxx,
-        NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
-        //SW = 32'b111001011000xxxxxxxxxxxxxxxxxxxx,
         A  = 32'b1110000010000xxx0xxx000000000xxx,
+        Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry  
+
+        S=32'b1110000001000xxx0xxx000000000xxx,
+        Rs=32'b1110000001100xxx0xxx000000000xxx,
+        Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
+
+        C=32'b1110000101010xxx0xxx000000000xxx,
+        
+        
+        BwA=32'b1110000000000xxx0xxx000000000xxx, // bitwise and
+        BAwc=32'b1110000111000xxx0xxx000000000xxx, // bitwise and with complement
+        BX=32'b1110000000100xxx0xxx000000000xxx, // xor
+        BO=32'b1110000110000xxx0xxx000000000xxx,
+
+        BR =32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
+        BRL=32'b11101011xxxxxxxxxxxxxxxxxxxxxxxx,
+
+        Mov=32'b1110000110100xxx0xxx000000000xxx,
+        Mn=32'b1110000111100xxx0xxx000000000xxx,
+
+        M=32'b1110000000000xxx00000xxx10010xxx,
+        MA=32'b1110000000100xxx0xxx0xxx10010xxx, // multiply accumlate
+
+        SWZE=32'b1110010110000xxx0xxxxxxxxxxxxxxx, // store word reg-imm zero extend
+
+        // NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
+        NOP = 32'b11110000100000000000000000000000,
+        // NOP = 32'b00000000000000000000000000000000,
         Store = 32'b11100101100000000xxx000000000000,
-        Load =  32'b10101010101010100xxx101010101010 
+        // Load  = 32'b11100101100100000xxx000000000000
+        // Load =  32'b10101010101010100xxx101010101010
+        Load =  32'b10101010101010100xxx101010101010
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
-    ////////////////////////////////////WARNING
-    //wrong numbers
-    parameter RDU = 11;
-    parameter   RDL = 7;
-    parameter   RS1U = 19;
-    parameter   RS1L = 15;
-    parameter   RS2U = 24;
-    parameter   RS2L = 20;
-
-
-
+    
+        //INSTRUCTION FORMAT 
+        parameter RDU = 0;
+        parameter   RDL = 0;
+        parameter   RS1U = 0;
+        parameter   RS1L = 0;
+        parameter   RS2U = 0;
+        parameter   RS2L = 0;
+        
     opcode si_a[];  // opcodes array to store enums so we can randomize and use them
     integer supported_instructions; // number of instructions in the array
     `include "amber_defines.sv"
@@ -53,7 +78,7 @@ package target_package;
     // used in if conditions to compare between (x) and (1 or 0)
     function bit xis1 (logic[31:0] a,logic[31:0] b); 
         logic x;
-        $display("xis1:                 a=%h,b=%h",a,b);
+        // $display("xis1:                 a=%h,b=%h",a,b);
         x = (a == b);
         if(x==1) return 1 ;
         if (x === 1'bx)

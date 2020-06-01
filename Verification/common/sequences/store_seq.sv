@@ -80,7 +80,6 @@ class store_sequence extends GUVM_sequence ;
             temp.SOM = SB_VERIFICATION_MODE ; 
             send(temp);
 
-            resetSeq();
             //genNop(10);
             
         end

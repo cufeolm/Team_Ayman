@@ -1,9 +1,9 @@
 onerror {resume}
 quietly WaveActivateNextPane {} 0
 
-add wave -r /top/dut/*
-add wave -r /*
-
+add wave -r /top/dut/u_execute/u_register_bank/*
+add wave -r vsim:/top/dut/interrupt_vector_sel
+add wave -r /top/*
 
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {50316229 ns} 0}

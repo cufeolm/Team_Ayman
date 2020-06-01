@@ -161,6 +161,9 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"SW":begin
 					verify_store_word(cmd_trans,res_trans,hist_trans);
 				end
+				"SWZE":begin
+					verify_store_word_zero_extend(cmd_trans,res_trans,hist_trans);
+				end
 				"SBRR":begin
 					verify_store_byte_reg_reg(cmd_trans,res_trans,hist_trans);
 				end

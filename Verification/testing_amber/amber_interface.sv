@@ -8,10 +8,11 @@ interface GUVM_interface(input clk);
     logic       i_system_rdy;
 
     logic [31:0] o_wb_adr;
-    logic [15:0] o_wb_sel;
+    logic [3:0] o_wb_sel;
     logic o_wb_we;
-    logic [127:0] i_wb_dat;
-    logic [127:0] o_wb_dat;
+    logic [31:0] i_wb_dat;
+    logic [31:0] o_wb_dat;
+
     logic o_wb_cyc;
     logic o_wb_stb;
     logic i_wb_ack;
@@ -19,11 +20,12 @@ interface GUVM_interface(input clk);
 
     // temp. registers
     logic [3:0] Rd;
-    logic [3:0] indicator;
+    logic [31:0] same_inst;
     logic [31:0] data_in;
 
 
-    logic [31:0]next_pc=0;
+
+    logic [31:0] next_pc=0;
     // declaring the monitor
     GUVM_result_monitor result_monitor_h;
 
@@ -33,9 +35,9 @@ interface GUVM_interface(input clk);
 
     // initializing the clk_pseudo signal
     initial begin
-        clk_pseudo = 0;
-        allow_pseudo_clk = 0 ;
-	end	
+        clk_pseudo=0;
+        allow_pseudo_clk=0;
+    end
 
     always @(clk) begin
         if (allow_pseudo_clk)begin
@@ -44,23 +46,24 @@ interface GUVM_interface(input clk);
     end
 
     task toggle_clk(integer i);
-      allow_pseudo_clk =1 ;
-      repeat(i)@(posedge clk_pseudo);
-      allow_pseudo_clk =0 ;
+        allow_pseudo_clk=1;
+        repeat(i) @(posedge clk_pseudo);
+        allow_pseudo_clk=0;
     endtask
 
     // sending data to the core
     task send_data(logic [31:0] data);
         data_in = data;
+        // dcache_wb_cached_rdata = data;
     endtask
 
     // sending instructions to the core
     task send_inst(logic [31:0] inst);
-        //indicator = inst; // distinguishing the load instruction: amber only
-        Rd = inst[15:12]; // destination register address bits: 4 bits 
-        $display("eh l 5ra da inst =%h and indic=%h",inst,{{16'haaaa},{Rd},{12'haaa}});
-        if(inst == {{16'haaaa},{Rd},{12'haaa}}) begin // accessing the register file by forcing
-            i_wb_dat = {128'hF0801003F0801003F0801003F0801003};
+        same_inst = inst;
+        Rd = inst[15:12]; // destination register address bits: 4 bits
+        $display("inst = %h", inst);
+        if(inst == {16'haaaa, Rd, 12'haaa}) begin // accessing the register file by forcing
+            i_wb_dat = {32'hF0800000};
             case(Rd)
                 4'b0000: dut.u_execute.u_register_bank.r0 = data_in;
                 4'b0001: dut.u_execute.u_register_bank.r1 = data_in;
@@ -68,62 +71,37 @@ interface GUVM_interface(input clk);
                 4'b0011: dut.u_execute.u_register_bank.r3 = data_in;
                 4'b0100: dut.u_execute.u_register_bank.r4 = data_in;
                 4'b0101: dut.u_execute.u_register_bank.r5 = data_in;
-                4'b0111: dut.u_execute.u_register_bank.r6 = data_in;
-                4'b1000: dut.u_execute.u_register_bank.r7 = data_in;
+                4'b0110: dut.u_execute.u_register_bank.r6 = data_in;
+                4'b0111: dut.u_execute.u_register_bank.r7 = data_in;
                 default: $display("Error in SEL");
             endcase
         end else begin
-            i_wb_dat = {96'hF0801003F0801003F0801003, inst};
+            i_wb_dat = inst;
         end
     endtask
 
     function void update_command_monitor(GUVM_sequence_item cmd);
-      command_monitor_h.write_to_cmd_monitor(cmd);
+        command_monitor_h.write_to_cmd_monitor(cmd);
     endfunction
-    function void update_result_monitor();
-      result_monitor_h.write_to_monitor(o_wb_dat,next_pc,4'h0);
-    endfunction
+
+    task update_result_monitor();
+        // result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
+        /*if(same_inst == {{16'haaaa}, {Rd}, {12'haaa}}) begin
+            o_wb_dat=0;
+            result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
+        end else begin
+            result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
+        end*/
+        if(o_wb_we==1)
+            result_monitor_h.write_to_monitor(o_wb_dat, o_wb_adr,o_wb_sel);
+        else
+            result_monitor_h.write_to_monitor(0,0,o_wb_sel);
+    endtask
 
     function logic[31:0] get_cpc();
-      $display("current_pc = %b       %t", o_wb_adr,$time);
-      return o_wb_adr;
+        $display("current_pc = %h       %t", dut.u_execute.u_register_bank.o_pc, $time);
+        return dut.u_execute.u_register_bank.o_pc;
     endfunction
-
-    // reveiving data from the DUT
-    // function logic [127:0] receive_data();
-    //     $display("result: %h", o_wb_dat);
-    //     result_monitor_h.write_to_monitor(o_wb_dat);
-    //     return o_wb_dat;
-    // endfunction
-
-    // sending the instruction to be verified
-    // task verify_inst(logic [31:0] inst);
-    //     send_inst(inst); 
-    //     repeat(2*50) begin 
-    //         #10 clk_pseudo=~clk_pseudo;
-    //     end
-    // endtask
-
-    // dealing with the register file with the following load and store functions 
-    // task store(logic [31:0] inst);
-    //     send_inst(inst);
-    //     repeat(2*10) begin 
-    //         #10 clk_pseudo=~clk_pseudo;
-    //     end
-    //     $display("result = %0d", receive_data());
-    //     repeat(2*10) begin 
-    //         #10 clk_pseudo=~clk_pseudo;
-    //     end
-    // endtask
-
-    // task load(logic [31:0] inst, logic [31:0] rd);
-    //     send_data(rd);
-    //     send_inst(inst);
-    //     send_data(rd);
-    //     repeat(2*50) begin 
-    //         #10 clk_pseudo=~clk_pseudo;
-    //     end
-    // endtask
 
     // initializing the core
     task set_Up();
@@ -132,10 +110,37 @@ interface GUVM_interface(input clk);
         i_system_rdy = 1'b1;
         i_wb_ack = 1'b1;
         i_wb_err = 1'b0;
-        //toggle_clk(10);
     endtask: set_Up
 
     task reset_dut();
+        i_irq = 1'b0;
+        i_firq = 1'b0;
+        i_system_rdy = 1'b1;
+        i_wb_ack = 1'b1;
+        i_wb_err = 1'b0;
+        i_wb_dat = {32'h00000000};
+        dut.u_execute.u_register_bank.r0 = 32'd0;
+        dut.u_execute.u_register_bank.r1 = 32'd0;
+        dut.u_execute.u_register_bank.r2 = 32'd0;
+        dut.u_execute.u_register_bank.r3 = 32'd0;
+        dut.u_execute.u_register_bank.r4 = 32'd0;
+        dut.u_execute.u_register_bank.r5 = 32'd0;
+        dut.u_execute.u_register_bank.r6 = 32'd0;
+        dut.u_execute.u_register_bank.r7 = 32'd0;
+        dut.u_execute.u_register_bank.r8 = 32'd0;
+        dut.u_execute.u_register_bank.r9 = 32'd0;
+        dut.u_execute.u_register_bank.r10 = 32'd0;
+        dut.u_execute.u_register_bank.r11 = 32'd0;
+        dut.u_execute.u_register_bank.r12 = 32'd0;
+        dut.u_execute.u_register_bank.r13 = 32'd0;
+        dut.u_execute.u_register_bank.r14 = 32'd0;
+        dut.u_execute.u_register_bank.r15 = 0;
+        //force dut.u_execute.u_register_bank.i_mode_idec
+        // force dut.cache_flush = 1;
+        // toggle_clk(2);
+        // force dut.cache_flush = 0;
+        toggle_clk(5);
+        // release dut.cache_flush;
         // amber does not have a reset signal in the core interface
     endtask : reset_dut
 

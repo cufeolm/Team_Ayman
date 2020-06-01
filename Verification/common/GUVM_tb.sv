@@ -42,6 +42,7 @@
 `include "sb.svh"
 `include "sh.svh"
 `include "sw.svh"
+`include "swze.svh"
 `include "sbrr.svh"
 `include "shrr.svh"
 `include "swrr.svh"

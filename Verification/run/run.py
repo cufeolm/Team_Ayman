@@ -29,7 +29,7 @@ DUT: """;
 		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
 	elif g == "3":
 		os.system("vsim -c -do ../testing_amber/run_amber.do")
-		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
+		x=("vsim -c -do \"vsim -novopt top +UVM_TESTNAME=")
 	elif g == "11":
 		os.system("vsim -c -do ../testing_riscy/run_tb.do")
 		x=("vsim -c -do \"vsim -novopt top +UVM_TESTNAME=")
@@ -38,19 +38,22 @@ DUT: """;
 		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
 	elif g == "33":
 		os.system("vsim -c -do ../testing_amber/run_tb.do")
-		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
+		x=("vsim -c -do \"vsim -novopt top +UVM_TESTNAME=")
 	elif g == "111":
 		x=("vsim -c -do \"vsim -novopt top +UVM_TESTNAME=")
 	elif g == "222":
 		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
 	elif g == "333":
-		x=("vsim -c -do \"vsim top +UVM_TESTNAME=")
+		x=("vsim -c -do \"vsim -novopt top +UVM_TESTNAME=")
 	elif g == "w1":
 		os.system("vsim -view vsim.wlf -do ../testing_riscy/wave.do")
+		break
 	elif g == "w2":
 		os.system("vsim -view vsim.wlf -do ../testing_leon/wave.do")
+		break
 	elif g == "w3":
 		os.system("vsim -view vsim.wlf -do ../testing_amber/wave.do")
+		break
 	else:
 		print("please enter a valid number")
 		break
@@ -218,6 +221,7 @@ please choose which instruction to simulate:
 7- store least significant byte reg-reg (based on sparc-v8 ISA): enter --> SBRR
 8- store least significant half word reg-reg (based on sparc-v8 ISA): enter --> SHRR
 9- store word reg-reg (based on sparc-v8 ISA): enter --> SWRR
+10- store word reg-imm zero extend (based on ARM-v2a ISA): enter --> SWZE
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -239,6 +243,8 @@ DUT: """;
 			z=("SHRR")
 		elif z == "9":
 			z=("SWRR")
+		elif z == "10":
+			z=("SWZE")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

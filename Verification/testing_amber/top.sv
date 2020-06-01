@@ -1,12 +1,11 @@
 module top;
     import uvm_pkg::*;
     import target_package::*;
-    //import iface::*;
 
     `include "uvm_macros.svh"
-    logic clk ; 
+    logic clk; 
 	GUVM_interface bfm(clk);
-    a25_core dut(
+    a23_core dut(
         .i_clk(bfm.clk_pseudo),
         .i_irq(bfm.i_irq),
         .i_firq(bfm.i_firq),
@@ -20,11 +19,10 @@ module top;
         .o_wb_stb(bfm.o_wb_stb),
         .i_wb_ack(bfm.i_wb_ack),
         .i_wb_err(bfm.i_wb_err)
-
     );
 
     initial begin
-        uvm_config_db#(virtual GUVM_interface)::set(null, "*", "bfm", bfm);
+        uvm_config_db #(virtual GUVM_interface)::set(null, "*", "bfm", bfm);
         fill_si_array();
         run_test();
     end
@@ -34,5 +32,3 @@ module top;
         forever #10 clk=~clk;
     end
 endmodule : top
-
-
