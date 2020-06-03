@@ -61,16 +61,18 @@ DUT: """;
 	s="""
 please choose which test to simulate:
 1- add_test (based on RISC-v ISA, Sparcv8 ISA, ARM v2a ISA): enter --> 1 
-2- GUVM_test (based on RISC-v ISA, Sparcv8 ISA, ARM v2a ISA): enter --> 2
-3- bie_test (based on sparcv8 ISA): enter --> 3
-4- child_test (prototype): enter --> 4
-5- python_test (prototype): enter --> 5
-6- bief_test (based on sparcv8 ISA): enter --> 6
-7- load_double_test (based on sparcv8 ISA): enter --> 7
-8- ADDXCC_test (based on RISC-v ISA, Sparcv8 ISA) -->8
-9- store_test (based on RISC-v ISA, Sparcv8 ISA,ARM v2a ISA) -->9
-10- mul_test (based on RISC-v ISA, Sparcv8 ISA) -->10
-
+2- branch with flags bief_test (based on sparcv8 ISA,ARM v2a ISA): enter --> 2  
+load --> load --> change flag --> branch --> arithmatic command --> store(2)
+3- A_type_test (based on RISC-v ISA, Sparcv8 ISA, ARM v2a ISA): enter --> 3     
+load --> load --> command --> store(2)
+4- load_double_test (based on sparcv8 ISA): enter --> 4
+load --> load --> load(2) --> store(2)
+5- arithmatic with and without flag arith_flag_test (based on RISC-v ISA, Sparcv8 ISA) -->5
+load --> load --> change flag --> command --> check flag --> store 
+6- store_test (based on RISC-v ISA, Sparcv8 ISA,ARM v2a ISA) -->6
+load --> load --> store(2)
+7- mul_test (based on RISC-v ISA, Sparcv8 ISA) -->7
+load --> load --> mul(35) --> store(2)
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -78,17 +80,30 @@ DUT: """;
 	if g == "1":
 		y=("add_test")
 		os.system(x+y+" +ARG_INST=A; log /* -r ; run -all ; quit\"")
+################################################################################################################
 	elif g == "2":
-		y=("GUVM_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
+		y=("bief_test")
+		s="""
+please choose which instruction to simulate:
+1- branch if equal flag (based on sparc-v8 ISA): enter --> BIEF
+2- branch if Negative flag (based on sparc-v8 ISA): enter --> BNEGF
+3- branch if carry flag (based on sparc-v8 ISA): enter --> BCSF
+4- branch if overflow flag (based on sparc-v8 ISA): enter --> BVSF
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("BIEF")
+		elif z == "2":
+			z=("BNEGF")
+		elif z == "3":
+			z=("BCSF")
+		elif z == "4":
+			z=("BVSF")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+################################################################################################################
 	elif g == "3":
-		y=("bie_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
-	elif g == "4":
-		y=("child_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
-	elif g == "5":
-		y=("python_test")
+		y=("A_type_test")
 		s="""
 please choose which instruction to simulate:
 1- add (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> A
@@ -152,30 +167,8 @@ DUT: """;
 		elif z == "19":
 			z=("LWMARR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "6":
-		y=("bief_test")
-		s="""
-please choose which instruction to simulate:
-1- branch if equal flag (based on sparc-v8 ISA): enter --> BIEF
-2- branch if Negative flag (based on sparc-v8 ISA): enter --> BNEGF
-3- branch if carry flag (based on sparc-v8 ISA): enter --> BCSF
-4- branch if overflow flag (based on sparc-v8 ISA): enter --> BVSF
-any other input will simulate no operation or make an error in the simulation
-DUT: """;
-		z=raw_input(s)
-		if z == "1":
-			z=("BIEF")
-		elif z == "2":
-			z=("BNEGF")
-		elif z == "3":
-			z=("BCSF")
-		elif z == "4":
-			z=("BVSF")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "6":
-		y=("subcc_test")
-		os.system(x+y+"; log /* -r ; run -all ; quit\"")
-	elif g == "7":
+################################################################################################################
+	elif g == "4":
 		y=("load_double_test")
 		s="""
 please choose which instruction to simulate:
@@ -189,8 +182,9 @@ DUT: """
 		elif z == "2":
 			z=("LDDRR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "8":
-		y=("addxcc_test")
+################################################################################################################
+	elif g == "5":
+		y=("arith_flag_test")
 		s="""
 please choose which instruction to simulate:
 1- ADD  (based on sparc-v8 ISA): enter --> add
@@ -209,7 +203,8 @@ DUT: """;
 		elif z == "4":
 			z=("ADDXCC")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "9":
+################################################################################################################
+	elif g == "6":
 		y=("store_test")
 		s="""
 please choose which instruction to simulate:
@@ -256,7 +251,8 @@ DUT: """;
 		elif z == "13":
 			z=("SBZERR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
-	elif g == "10":
+################################################################################################################
+	elif g == "7":
 		y=("mul_test")
 		s="""
 please choose which instruction to simulate:
@@ -276,6 +272,7 @@ DUT: """;
 		elif z == "4":
 			z=("MHUR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+################################################################################################################
 	else:
 		print("please enter a valid number")
 		break

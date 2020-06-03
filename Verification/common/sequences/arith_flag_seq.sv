@@ -1,11 +1,11 @@
 
 //this is an example of how to make a sequence
 
-class addxcc_sequence extends GUVM_sequence ;
-    `uvm_object_utils(addxcc_sequence);
+class arith_flag_sequence extends GUVM_sequence ;
+    `uvm_object_utils(arith_flag_sequence);
     target_seq_item addcc,command,load1,load2,load3,load4,store1,store2,rdpsr , temp,reset ;
     target_seq_item c;
-    function new(string name = "addxcc_sequence");
+    function new(string name = "arith_flag_sequence");
         super.new(name);
     endfunction : new
 
@@ -148,5 +148,5 @@ class addxcc_sequence extends GUVM_sequence ;
     endtask : body
 
 
-endclass : addxcc_sequence
+endclass : arith_flag_sequence
 

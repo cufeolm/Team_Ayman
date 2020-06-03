@@ -1,10 +1,10 @@
 
 //this is an example of how to make a sequence
 
-class python_sequence extends GUVM_sequence ;
-    `uvm_object_utils(python_sequence);
+class A_type_sequence extends GUVM_sequence ;
+    `uvm_object_utils(A_type_sequence);
     
-    function new(string name = "python_sequence");
+    function new(string name = "A_type_sequence");
         super.new(name);
     endfunction : new
     
@@ -85,5 +85,5 @@ class python_sequence extends GUVM_sequence ;
     endtask : body
 
 
-endclass : python_sequence
+endclass : A_type_sequence
 
