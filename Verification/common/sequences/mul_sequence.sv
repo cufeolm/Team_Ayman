@@ -11,7 +11,7 @@ class mul_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(1)
+        repeat(10)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
@@ -49,8 +49,8 @@ class mul_sequence extends GUVM_sequence ;
 
             // load1.data = load1.data&&32'h0000ffff; 
             // load2.data = load2.data &&32'h0000ffff;
-            load1.data =32 ;
-            load2.data = 4;
+            //load1.data =32 ;
+            //load2.data = 4;
 
             resetSeq();
 			//send the sequence
@@ -62,7 +62,7 @@ class mul_sequence extends GUVM_sequence ;
             send(load2);
             
             genNop(5,load2.data);
-            
+            repeat(35)
             send(command);
             
             genNop(5,0);
