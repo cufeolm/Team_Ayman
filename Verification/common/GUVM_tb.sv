@@ -35,7 +35,7 @@
 `include "lwmarr.svh" // riscy extension instruction
 `include "ldd.svh"
 `include "lddrr.svh"
-`include"rdpsr.svh"
+`include "rdpsr.svh"
 `include "sbma.svh"
 `include "shma.svh"
 `include "swma.svh"
@@ -43,6 +43,9 @@
 `include "sh.svh"
 `include "sw.svh"
 `include "swze.svh"
+`include "swzerr.svh"
+`include "sbze.svh"
+`include "sbzerr.svh"
 `include "sbrr.svh"
 `include "shrr.svh"
 `include "swrr.svh"
