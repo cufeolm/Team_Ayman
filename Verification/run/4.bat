@@ -1,3 +1,3 @@
 cls
-vsim -c -do ../testing_amber_a/run_amber.do
+vsim -c -do ../testing_amber/run_amber.do
 
