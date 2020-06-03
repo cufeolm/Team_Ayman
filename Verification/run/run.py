@@ -60,15 +60,16 @@ DUT: """;
 
 	s="""
 please choose which test to simulate:
-1- add_test (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> 1 
-2- GUVM_test (based on RISC-v ISA, Sparcv8 ISA, ARM ISA): enter --> 2
+1- add_test (based on RISC-v ISA, Sparcv8 ISA, ARM v2a ISA): enter --> 1 
+2- GUVM_test (based on RISC-v ISA, Sparcv8 ISA, ARM v2a ISA): enter --> 2
 3- bie_test (based on sparcv8 ISA): enter --> 3
 4- child_test (prototype): enter --> 4
 5- python_test (prototype): enter --> 5
 6- bief_test (based on sparcv8 ISA): enter --> 6
 7- load_double_test (based on sparcv8 ISA): enter --> 7
 8- ADDXCC_test (based on RISC-v ISA, Sparcv8 ISA) -->8
-9- store_test (based on RISC-v ISA, Sparcv8 ISA) -->9
+9- store_test (based on RISC-v ISA, Sparcv8 ISA,ARM v2a ISA) -->9
+10- mul_test (based on RISC-v ISA, Sparcv8 ISA) -->10
 
 any other input wil terminate the simulation
 DUT: """;
@@ -254,6 +255,26 @@ DUT: """;
 			z=("SBZE")
 		elif z == "13":
 			z=("SBZERR")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+	elif g == "10":
+		y=("mul_test")
+		s="""
+please choose which instruction to simulate:
+1- multiply unsigned reg-reg (based on RISC-v ISA and Sparc-V8 ISA): enter --> UMULR
+2- multiply signed and get the upper half of result reg-reg (based on RISC-v ISA): enter --> MHSR
+3- multiply signed-unsigned and get the upper half of result reg-reg (based on RISC-v ISA): enter --> MHSUR
+4- multiply unsigned and get the upper half of result reg-reg (based on sparc-v8 ISA): enter --> MHUR
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)
+		if z == "1":
+			z=("UMULR")
+		elif z == "2":
+			z=("MHSR")
+		elif z == "3":
+			z=("MHSUR")
+		elif z == "4":
+			z=("MHUR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")

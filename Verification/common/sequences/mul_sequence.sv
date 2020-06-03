@@ -11,7 +11,7 @@ class mul_sequence extends GUVM_sequence ;
 
 
     task body();
-        repeat(1)
+        repeat(10)
         begin
             
             load1 = target_seq_item::type_id::create("load1"); //load register x with data dx
@@ -23,8 +23,8 @@ class mul_sequence extends GUVM_sequence ;
            // $display("hello , this is the sequence,%d",command.upper_bit);
             //command.ran_constrained(findOP("A")); // first randomize the instruction as an add (A is the enum code for add)
 
-            command.ran_constrained(findOP("UMULR"));
-            //command.ran_constrained(findOP(clp_inst));
+            // command.ran_constrained(findOP("UMULR"));
+            command.ran_constrained(findOP(clp_inst));
             
             //nop.ran_constrained(NOP);
             //$display("before the setup %d",command.data);
@@ -49,8 +49,8 @@ class mul_sequence extends GUVM_sequence ;
 
             // load1.data = load1.data&&32'h0000ffff; 
             // load2.data = load2.data &&32'h0000ffff;
-            load1.data =32 ;
-            load2.data = 4;
+            // load1.data =32 ;
+            // load2.data = 4;
 
             resetSeq();
 			//send the sequence
