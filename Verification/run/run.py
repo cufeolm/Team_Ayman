@@ -193,10 +193,10 @@ DUT: """
 		y=("addxcc_test")
 		s="""
 please choose which instruction to simulate:
-1- branch if equal flag (based on sparc-v8 ISA): enter --> add
-2- branch if Negative flag (based on sparc-v8 ISA): enter --> addcc
-3- branch if carry flag (based on sparc-v8 ISA): enter --> addx
-4- branch if overflow flag (based on sparc-v8 ISA): enter --> addxcc
+1- ADD  (based on sparc-v8 ISA): enter --> add
+2- Add and change ICC flags (based on sparc-v8 ISA): enter --> addcc
+3- Add with carry (based on sparc-v8 ISA): enter --> addx
+4- Add with carry and change ICC flags(based on sparc-v8 ISA): enter --> addxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)     

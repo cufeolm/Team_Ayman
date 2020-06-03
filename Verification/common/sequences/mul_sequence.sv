@@ -62,7 +62,7 @@ class mul_sequence extends GUVM_sequence ;
             send(load2);
             
             genNop(5,load2.data);
-            
+            repeat(35)
             send(command);
             
             genNop(5,0);

@@ -5,21 +5,23 @@ package target_package;
     // instructions opcodes verified in  this core 
     typedef enum logic[31:0] { 
         A  = 32'b1110000010000xxx0xxx000000000xxx,
-        Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry  
-
+        Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry 
+         
+        SUBCC = 32'b1110000001010xxx0xxx000000000xxx,
         S=32'b1110000001000xxx0xxx000000000xxx,
         Rs=32'b1110000001100xxx0xxx000000000xxx,
         Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
 
         C=32'b1110000101010xxx0xxx000000000xxx,
-        
+        BIEF=32'b00001010xxxxxxxxxxxxxxxxxxxxxxxx,
+        BA = 32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
         
         BwA=32'b1110000000000xxx0xxx000000000xxx, // bitwise and
         BAwc=32'b1110000111000xxx0xxx000000000xxx, // bitwise and with complement
         BX=32'b1110000000100xxx0xxx000000000xxx, // xor
         BO=32'b1110000110000xxx0xxx000000000xxx,
 
-        BR =32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
+        //BR =32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
         BRL=32'b11101011xxxxxxxxxxxxxxxxxxxxxxxx,
 
         Mov=32'b1110000110100xxx0xxx000000000xxx,
@@ -43,11 +45,11 @@ package target_package;
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
     
         //INSTRUCTION FORMAT 
-        parameter RDU = 0;
-        parameter   RDL = 0;
-        parameter   RS1U = 0;
-        parameter   RS1L = 0;
-        parameter   RS2U = 0;
+        parameter RDU = 15;
+        parameter   RDL = 12;
+        parameter   RS1U = 19;
+        parameter   RS1L = 16;
+        parameter   RS2U = 3;
         parameter   RS2L = 0;
         
     opcode si_a[];  // opcodes array to store enums so we can randomize and use them
