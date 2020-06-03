@@ -28,12 +28,14 @@ package target_package;
         M=32'b1110000000000xxx00000xxx10010xxx,
         MA=32'b1110000000100xxx0xxx0xxx10010xxx, // multiply accumlate
 
-        SWZE=32'b1110010110000xxx0xxxxxxxxxxxxxxx, // store word reg-imm zero extend
-
         // NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
         NOP = 32'b11110000100000000000000000000000,
         // NOP = 32'b00000000000000000000000000000000,
         Store = 32'b11100101100000000xxx000000000000,
+        SWZE   =32'b1110010110000xxx0xxxxxxxxxxxxxxx, // store word reg-imm zero extend
+        SWZERR= 32'b1110011110000xxx0xxx000000000xxx, // store word reg-reg zero extend
+        SBZE   =32'b1110010111000xxx0xxxxxxxxxxxxxxx, // store byte reg-imm zero extend
+        SBZERR= 32'b1110011111000xxx0xxx000000000xxx, // store byte reg-reg zero extend
         // Load  = 32'b11100101100100000xxx000000000000
         // Load =  32'b10101010101010100xxx101010101010
         Load =  32'b10101010101010100xxx101010101010

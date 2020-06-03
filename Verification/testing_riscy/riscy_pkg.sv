@@ -20,6 +20,11 @@ package target_package;
 		SBMA=32'bxxxxxxxxxxxxxxxxx000xxxxx0100011, // store least significant byte reg-imm
 		SHMA=32'bxxxxxxxxxxxxxxxxx001xxxxx0100011, // store least significant half word reg-imm
 		
+		M=32'b0000001xxxxxxxxxx000xxxxx0110011, // multiply 
+		Mh=32'b0000001xxxxxxxxxx010xxxxx0110011, // multiply signed and get the upper half of result 
+		Mhs=32'b0000001xxxxxxxxxx010xxxxx0110011, // multiply signed-unsigned and get the upper half of result
+		Mhu=32'b0000001xxxxxxxxxx011xxxxx0110011, // multiply unsigned and get the upper half of result
+
 		NOP=32'h0000001B,
 		Jal=32'bxxxxxxxxxxxxxxxxxxxxxxxxx1101111,
 		BIGTOER=32'bxxxxxxxxxxxxxxxxx101xxxxx1100011,// branch if greater than or equal reg-reg (signed)

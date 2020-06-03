@@ -222,6 +222,9 @@ please choose which instruction to simulate:
 8- store least significant half word reg-reg (based on sparc-v8 ISA): enter --> SHRR
 9- store word reg-reg (based on sparc-v8 ISA): enter --> SWRR
 10- store word reg-imm zero extend (based on ARM-v2a ISA): enter --> SWZE
+11- store word reg-reg zero extend (based on ARM-v2a ISA): enter --> SWZERR
+12- store byte reg-imm zero extend (based on ARM-v2a ISA): enter --> SBZE
+13- store byte reg-reg zero extend (based on ARM-v2a ISA): enter --> SBZERR
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -245,6 +248,12 @@ DUT: """;
 			z=("SWRR")
 		elif z == "10":
 			z=("SWZE")
+		elif z == "11":
+			z=("SWZERR")
+		elif z == "12":
+			z=("SBZE")
+		elif z == "13":
+			z=("SBZERR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 	else:
 		print("please enter a valid number")
