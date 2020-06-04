@@ -44,6 +44,7 @@ class arith_flag_sequence extends GUVM_sequence ;
             
             do begin
                 rdpsr.ran_constrained(findOP("RDPSR")); 
+                if (rdpsr.inst==NOP) break ; 
                 rdpsr.setup();
             end
             while(command.rd==rdpsr.rd || rdpsr.rd == 0);

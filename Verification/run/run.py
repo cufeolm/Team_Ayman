@@ -3,17 +3,17 @@ import os
 while (1):
 	s = """
 [[[ welcome to GUVM user interface ]]]
-please choose which dut to compile:
+Compile DUT + Test Bench :  
 1- Riscy core (based on RISC-v ISA): enter --> 1 
 2- Leon core (based on Sparcv8 ISA): enter --> 2
 3- Amber core (based on ARM ISA): enter --> 3
 if u want to skip compiling DUT and compile test bench only
-please choose which dut to verify :
+Compile Test Bench only :
 1- Riscy core (based on RISC-v ISA): enter --> 11 
 2- Leon core (based on Sparcv8 ISA): enter --> 22
 3- Amber core (based on ARM ISA): enter --> 33
 if u want to skip all compiling DUT determine which DUT u want to simulate on
-please choose which dut to verify :
+Run Test   :
 1- Riscy core (based on RISC-v ISA): enter --> 111
 2- Leon core (based on Sparcv8 ISA): enter --> 222
 3- Amber core (based on ARM ISA): enter --> 333
