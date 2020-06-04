@@ -51,3 +51,7 @@
 `include "swrr.svh"
 `include "umulr.svh"
 `include "udivr.svh"
+`include "lwmaze.svh"
+`include "lwmazerr.svh"
+`include "lbmaze.svh"
+`include "lbmazerr.svh"

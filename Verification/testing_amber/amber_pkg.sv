@@ -39,8 +39,12 @@ package target_package;
         SBZE   =32'b1110010111000xxx0xxxxxxxxxxxxxxx, // store byte reg-imm zero extend
         SBZERR= 32'b1110011111000xxx0xxx000000000xxx, // store byte reg-reg zero extend
         // Load  = 32'b11100101100100000xxx000000000000
-        // Load =  32'b10101010101010100xxx101010101010
-        Load =  32'b10101010101010100xxx101010101010
+        // Load =  32'b10101010101010100xxx101010101010,
+        Load =  32'b11100101100100000xxx000000000000,
+        LWMAZE  = 32'b1110010110010xxx0xxxxxxxxxxxxxxx, // load word with misaligned feat. reg-imm zero extend
+        LWMAZERR= 32'b1110011110010xxx0xxx000000000xxx, // load word with misaligned feat. reg-reg zero extend
+        LBMAZE  = 32'b1110010111010xxx0xxxxxxxxxxxxxxx, // load byte with misaligned feat. reg-imm zero extend
+        LBMAZERR= 32'b1110011111010xxx0xxx000000000xxx // load byte with misaligned feat. reg-reg zero extend
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
     
