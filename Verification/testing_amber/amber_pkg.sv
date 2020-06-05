@@ -6,8 +6,9 @@ package target_package;
     typedef enum logic[31:0] { 
         A  = 32'b1110000010000xxx0xxx000000000xxx,
         Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry 
+        ADDCC = 32'b1110000010010xxx0xxx000000000xxx,// ADD and change flags
          
-        SUBCC = 32'b1110000001010xxx0xxx000000000xxx,
+        SUBCC = 32'b1110000001010xxx0xxx000000000xxx,// SUB and change flags
         S=32'b1110000001000xxx0xxx000000000xxx,
         Rs=32'b1110000001100xxx0xxx000000000xxx,
         Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
@@ -40,11 +41,12 @@ package target_package;
         SBZERR= 32'b1110011111000xxx0xxx000000000xxx, // store byte reg-reg zero extend
         // Load  = 32'b11100101100100000xxx000000000000
         // Load =  32'b10101010101010100xxx101010101010
+        RDPSR =  32'b11100101100000001111000000000000,
         Load =  32'b10101010101010100xxx101010101010
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
     
-        //INSTRUCTION FORMAT 
+        //INSTRUCTION FORMAT (for arithmatic)
         parameter RDU = 15;
         parameter   RDL = 12;
         parameter   RS1U = 19;
