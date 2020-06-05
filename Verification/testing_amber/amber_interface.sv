@@ -22,7 +22,7 @@ interface GUVM_interface(input clk);
     logic [3:0] Rd;
     logic [31:0] same_inst;
     logic [31:0] data_in;
-
+    static integer load_cyc_cnt = 0;
 
 
     logic [31:0] next_pc=0;
@@ -59,43 +59,44 @@ interface GUVM_interface(input clk);
 
     // sending instructions to the core
     task send_inst(logic [31:0] inst);
-        same_inst = inst;
-        Rd = inst[15:12]; // destination register address bits: 4 bits
-        $display("inst = %h", inst);
-        if(inst == {16'haaaa, Rd, 12'haaa}) begin // accessing the register file by forcing
-            i_wb_dat = {32'hF0800000};
-            case(Rd)
-                4'b0000: dut.u_execute.u_register_bank.r0 = data_in;
-                4'b0001: dut.u_execute.u_register_bank.r1 = data_in;
-                4'b0010: dut.u_execute.u_register_bank.r2 = data_in;
-                4'b0011: dut.u_execute.u_register_bank.r3 = data_in;
-                4'b0100: dut.u_execute.u_register_bank.r4 = data_in;
-                4'b0101: dut.u_execute.u_register_bank.r5 = data_in;
-                4'b0110: dut.u_execute.u_register_bank.r6 = data_in;
-                4'b0111: dut.u_execute.u_register_bank.r7 = data_in;
-                default: $display("Error in SEL");
-            endcase
-        end else begin
+        static logic [31:0] load = 32'b1110_01x1_1x01_0xxx_0xxx_xxxx_xxxx_xxxx;
+        static integer load_cycles = 3;
+        //Rd = inst[15:12]; // destination register address bits: 4 bits
+        if(xis1(inst,load)) 
+        begin 
+            load_cyc_cnt = 0;
+            $display("load found in interface = %h", inst);
+        end
+        if (load_cyc_cnt < load_cycles) 
+        begin
+            load_cyc_cnt = load_cyc_cnt + 1;
             i_wb_dat = inst;
         end
+        else if (load_cyc_cnt == load_cycles)
+        begin
+            i_wb_dat = data_in;
+            load_cyc_cnt = load_cyc_cnt + 1;
+        end
+        else if (load_cyc_cnt > load_cycles)
+        begin
+            i_wb_dat = inst;
+            load_cyc_cnt = load_cyc_cnt + 1;
+        end
+        else
+            i_wb_dat = inst;
     endtask
 
     function void update_command_monitor(GUVM_sequence_item cmd);
+        cmd.inst = i_wb_dat; 
         command_monitor_h.write_to_cmd_monitor(cmd);
     endfunction
 
     task update_result_monitor();
-        // result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
-        /*if(same_inst == {{16'haaaa}, {Rd}, {12'haaa}}) begin
-            o_wb_dat=0;
-            result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
-        end else begin
-            result_monitor_h.write_to_monitor(o_wb_dat, next_pc);
-        end*/
         if(o_wb_we==1)
             result_monitor_h.write_to_monitor(o_wb_dat, o_wb_adr,o_wb_sel);
         else
-            result_monitor_h.write_to_monitor(0,0,o_wb_sel);
+            if (load_cyc_cnt == 5) result_monitor_h.write_to_monitor(0,o_wb_adr,o_wb_sel);
+            else result_monitor_h.write_to_monitor(0,0,o_wb_sel);
     endtask
 
     function logic[31:0] get_cpc();
@@ -139,7 +140,7 @@ interface GUVM_interface(input clk);
         // force dut.cache_flush = 1;
         // toggle_clk(2);
         // force dut.cache_flush = 0;
-        toggle_clk(5);
+        toggle_clk(6);
         // release dut.cache_flush;
         // amber does not have a reset signal in the core interface
     endtask : reset_dut

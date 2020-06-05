@@ -125,6 +125,10 @@ please choose which instruction to simulate:
 17- Load signed byte with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LUBMARR #riscy extension instruction
 18- Load signed half with misalignment feat. word reg-imm (based on RISC-v ISA): enter --> LUHMARR #riscy extension instruction
 19- Load word with misalignment feat. reg-imm (based on RISC-v ISA): enter --> LWMARR #riscy extension instruction
+20- Load word with misalignment feat., zero extending offset and reg-imm (based on ARM-v2a ISA): enter --> LWMAZE
+21- Load word with misalignment feat., zero extending offset and reg-reg (based on ARM-v2a ISA): enter --> LWMAZERR
+22- Load byte with misalignment feat., zero extending offset and reg-imm (based on ARM-v2a ISA): enter --> LBMAZE
+23- Load byte with misalignment feat., zero extending offset and reg-reg (based on ARM-v2a ISA): enter --> LBMAZERR
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -166,6 +170,14 @@ DUT: """;
 			z=("LUHMARR")
 		elif z == "19":
 			z=("LWMARR")
+		elif z == "20":
+			z=("LWMAZE")
+		elif z == "21":
+			z=("LWMAZERR")
+		elif z == "22":
+			z=("LBMAZE")
+		elif z == "23":
+			z=("LBMAZERR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 ################################################################################################################
 	elif g == "4":

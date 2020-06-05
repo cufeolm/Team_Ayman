@@ -61,7 +61,7 @@ class arith_flag_sequence extends GUVM_sequence ;
             end
 
             if ($isunknown(addcc.rs2))
-                load2.load(0);
+                load2.inst=findOP("NOP");
             else
             begin
                 load2.load(addcc.rs2);//specify regx address  
@@ -78,7 +78,7 @@ class arith_flag_sequence extends GUVM_sequence ;
             end
 
             if ($isunknown(command.rs2))
-                load4.load(0);
+               load2.inst=findOP("NOP");
             else
             begin
                 load4.load(command.rs2);//specify regx address  
