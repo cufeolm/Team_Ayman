@@ -55,3 +55,6 @@
 `include "lwmazerr.svh"
 `include "lbmaze.svh"
 `include "lbmazerr.svh"
+`include "mhsr.svh"
+`include "mhsur.svh"
+`include "mhur.svh"

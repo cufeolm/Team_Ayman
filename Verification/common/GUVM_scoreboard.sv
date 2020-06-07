@@ -255,6 +255,15 @@ class GUVM_scoreboard extends uvm_scoreboard;
 				"UMULR":begin
 					verify_umulr(cmd_trans,res_trans,hist_trans);
 				end
+				"MHSR":begin
+					verify_multiply_high_signed_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"MHSUR":begin
+					verify_multiply_high_signed_unsigned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
+				"MHUR":begin
+					verify_multiply_high_unsigned_reg_reg(cmd_trans,res_trans,hist_trans);
+				end
 				"UDIVR":begin
 					verify_umulr(cmd_trans,res_trans,hist_trans);
 				end

@@ -54,14 +54,12 @@ interface GUVM_interface(input clk);
     // sending data to the core
     task send_data(logic [31:0] data);
         data_in = data;
-        // dcache_wb_cached_rdata = data;
     endtask
 
     // sending instructions to the core
     task send_inst(logic [31:0] inst);
-        static logic [31:0] load = 32'b1110_01x1_1x01_0xxx_0xxx_xxxx_xxxx_xxxx;
-        static integer load_cycles = 3;
-        //Rd = inst[15:12]; // destination register address bits: 4 bits
+        static logic [31:0] load = 32'b1110_01x1_1x01_0xxx_0xxx_xxxx_xxxx_xxxx; // any kind of load in amber core
+        static integer load_cycles = 3; // num of cycles before fetch to put data on wb data bus
         if(xis1(inst,load)) 
         begin 
             load_cyc_cnt = 0;
@@ -136,13 +134,7 @@ interface GUVM_interface(input clk);
         dut.u_execute.u_register_bank.r13 = 32'd0;
         dut.u_execute.u_register_bank.r14 = 32'd0;
         dut.u_execute.u_register_bank.r15 = 0;
-        //force dut.u_execute.u_register_bank.i_mode_idec
-        // force dut.cache_flush = 1;
-        // toggle_clk(2);
-        // force dut.cache_flush = 0;
         toggle_clk(6);
-        // release dut.cache_flush;
-        // amber does not have a reset signal in the core interface
     endtask : reset_dut
 
 endinterface: GUVM_interface
