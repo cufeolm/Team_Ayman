@@ -47,8 +47,8 @@ package target_package;
         LWMAZE  = 32'b1110010110010xxx0xxxxxxxxxxxxxxx, // load word with misaligned feat. reg-imm zero extend
         LWMAZERR= 32'b1110011110010xxx0xxx000000000xxx, // load word with misaligned feat. reg-reg zero extend
         LBMAZE  = 32'b1110010111010xxx0xxxxxxxxxxxxxxx, // load byte with misaligned feat. reg-imm zero extend
-        LBMAZERR= 32'b1110011111010xxx0xxx000000000xxx // load byte with misaligned feat. reg-reg zero extend
-        RDPSR =  32'b11100101100000001111000000000000,
+        LBMAZERR= 32'b1110011111010xxx0xxx000000000xxx, // load byte with misaligned feat. reg-reg zero extend
+        RDPSR =  32'b11100101100000001111000000000000
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
     
