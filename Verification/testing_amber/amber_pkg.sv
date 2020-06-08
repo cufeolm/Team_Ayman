@@ -5,6 +5,7 @@ package target_package;
     // instructions opcodes verified in  this core 
     typedef enum logic[31:0] { 
         A  = 32'b1110000010000xxx0xxx000000000xxx,
+        // A  = 32'b111000001000xxxxxxxx00000000xxxx,
         Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry 
         ADDCC = 32'b1110000010010xxx0xxx000000000xxx,// ADD and change flags
          
