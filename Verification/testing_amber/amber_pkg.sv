@@ -35,7 +35,7 @@ package target_package;
         // NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
         NOP = 32'b11110000100000000000000000000000,
         // NOP = 32'b00000000000000000000000000000000,
-        Store = 32'b11100101100000000xxx000000000000,
+        Store = 32'b1110010110000000xxxx000000000000, // VITAL WARNING , mostafa made it 4 unknowns
         SWZE   =32'b1110010110000xxx0xxxxxxxxxxxxxxx, // store word reg-imm zero extend
         SWZERR= 32'b1110011110000xxx0xxx000000000xxx, // store word reg-reg zero extend
         SBZE   =32'b1110010111000xxx0xxxxxxxxxxxxxxx, // store byte reg-imm zero extend

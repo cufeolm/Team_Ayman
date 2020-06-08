@@ -63,7 +63,7 @@ interface GUVM_interface(input clk);
         if(xis1(inst,load)) 
         begin 
             load_cyc_cnt = 0;
-            $display("load found in interface = %h", inst);
+           // $display("load found in interface = %h", inst);
         end
         if (load_cyc_cnt < load_cycles) 
         begin
@@ -98,7 +98,7 @@ interface GUVM_interface(input clk);
     endtask
 
     function logic[31:0] get_cpc();
-        $display("current_pc = %h       %t", dut.u_execute.u_register_bank.o_pc, $time);
+        //$display("current_pc = %h       %t", dut.u_execute.u_register_bank.o_pc, $time);
         return dut.u_execute.u_register_bank.o_pc;
     endfunction
 

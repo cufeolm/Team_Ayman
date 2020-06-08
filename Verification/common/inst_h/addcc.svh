@@ -85,6 +85,8 @@ function void verify_addcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction 
 		//hc = res_trans.result;
 		success = 1 ; 
 		report = "\n error report:\n";
+		report = {report , $sformatf("queue of results :%p \n",q)};
+		report = {report , $sformatf("first store:%h,second store :%h \n",q[0],q[1])};
 		if (q[0]!=h1[31:0]) begin
 			success = 0 ;
 			report = {report , $sformatf("operation done wrong : Dut calculation=%h,SB calculation = %h \n",q[0],h1)};
