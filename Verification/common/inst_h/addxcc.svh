@@ -13,7 +13,7 @@ function void verify_addxcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction
 	i2 =  hist_trans.get_reg_data(cmd_trans.rs2); 
 	
 	
-	pipe_length =  5 ;
+	pipe_length =  6 ;
 	q = {};
 	
 	
