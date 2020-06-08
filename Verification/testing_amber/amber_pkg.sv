@@ -8,14 +8,16 @@ package target_package;
         // A  = 32'b111000001000xxxxxxxx00000000xxxx,
         ADDX=   32'b1110000010100xxx0xxx000000000xxx, // add with carry 
         ADDCC = 32'b1110000010010xxx0xxx000000000xxx,// ADD and change flags
-        ADDXCC=   32'b1110000010110xxx0xxx000000000xxx,
+        ADDXCC=   32'b1110000010110xxx0xxx000000000xxx,//ADD with carry and change flags
          
         SUBCC = 32'b1110000001010xxx0xxx000000000xxx,// SUB and change flags
-        S=32'b1110000001000xxx0xxx000000000xxx,
-        Rs=32'b1110000001100xxx0xxx000000000xxx,
+        S=      32'b1110000001000xxx0xxx000000000xxx,// subtract
+        
+        Rs=     32'b1110000001100xxx0xxx000000000xxx,// reverse subtract
         Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
 
         C=32'b1110000101010xxx0xxx000000000xxx,
+
         BIEF=32'b00001010xxxxxxxxxxxxxxxxxxxxxxxx,
         BA = 32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
         
