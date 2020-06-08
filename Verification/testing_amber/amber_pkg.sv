@@ -6,8 +6,9 @@ package target_package;
     typedef enum logic[31:0] { 
         A  = 32'b1110000010000xxx0xxx000000000xxx,
         // A  = 32'b111000001000xxxxxxxx00000000xxxx,
-        Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry 
+        ADDX=   32'b1110000010100xxx0xxx000000000xxx, // add with carry 
         ADDCC = 32'b1110000010010xxx0xxx000000000xxx,// ADD and change flags
+        ADDXCC=   32'b1110000010110xxx0xxx000000000xxx,
          
         SUBCC = 32'b1110000001010xxx0xxx000000000xxx,// SUB and change flags
         S=32'b1110000001000xxx0xxx000000000xxx,
@@ -49,6 +50,12 @@ package target_package;
         RDPSR =  32'b11100101100000001111000000000000
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
+
+       //FLAG PLACE DECLARATION
+        parameter LOC_ZF = 30;
+        parameter LOC_CF = 29;
+        parameter LOC_VF = 28;
+        parameter LOC_NF = 31;
     
         //INSTRUCTION FORMAT (for arithmatic)
         parameter RDU = 15;

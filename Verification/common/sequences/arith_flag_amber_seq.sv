@@ -125,13 +125,13 @@ class arith_flag_amber_sequence extends GUVM_sequence ;
             // genNop(5,0);
             
             send(store1);
-            temp = copy(store1);
-            send(temp);
+            // temp = copy(store1);
+            // send(temp);
             genNop(5,0);
 
             send(store2);
-            temp = copy(rdpsr);
-            send(temp);
+            // temp = copy(rdpsr);
+            // send(temp);
             genNop(5,0);
 
 

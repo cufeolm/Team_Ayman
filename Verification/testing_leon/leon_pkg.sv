@@ -53,6 +53,12 @@ package target_package;
         LW= 32'b11xxxxx000000xxxxx1xxxxxxxxxxxxx // load word reg-imm
     } opcode;
     
+
+    //FLAG PLACE DECLARATION
+    parameter LOC_ZF = 22;
+    parameter LOC_CF = 20;
+    parameter LOC_VF = 21;
+    parameter LOC_NF = 23;
     //INSTRUCTION FORMAT 
     parameter RDU = 29;
     parameter   RDL = 25;
