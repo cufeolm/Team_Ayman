@@ -38,7 +38,13 @@ package target_package;
         Load = 32'b00000000000000000010xxxxx0000011,
 		LWMA= 32'bxxxxxxxxxxxxxxxxx010xxxxx0000011 // load word with misalignment feat. reg-imm
 	} opcode;
-    // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
+	// mutual instructions between cores have the same name so we can verify all cores using one scoreboard
+	
+       //FLAG PLACE DECLARATION
+	parameter LOC_ZF = 0;
+	parameter LOC_CF = 0;
+	parameter LOC_VF = 0;
+	parameter LOC_NF = 0;
 	//INSTRUCTION FORMAT 
     parameter RDU = 11;
     parameter   RDL = 7;

@@ -5,15 +5,19 @@ package target_package;
     // instructions opcodes verified in  this core 
     typedef enum logic[31:0] { 
         A  = 32'b1110000010000xxx0xxx000000000xxx,
-        Awc=32'b1110000010100xxx0xxx000000000xxx, // add with carry 
+        // A  = 32'b111000001000xxxxxxxx00000000xxxx,
+        ADDX=   32'b1110000010100xxx0xxx000000000xxx, // add with carry 
         ADDCC = 32'b1110000010010xxx0xxx000000000xxx,// ADD and change flags
+        ADDXCC=   32'b1110000010110xxx0xxx000000000xxx,//ADD with carry and change flags
          
         SUBCC = 32'b1110000001010xxx0xxx000000000xxx,// SUB and change flags
-        S=32'b1110000001000xxx0xxx000000000xxx,
-        Rs=32'b1110000001100xxx0xxx000000000xxx,
+        S=      32'b1110000001000xxx0xxx000000000xxx,// subtract
+        
+        Rs=     32'b1110000001100xxx0xxx000000000xxx,// reverse subtract
         Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
 
         C=32'b1110000101010xxx0xxx000000000xxx,
+
         BIEF=32'b00001010xxxxxxxxxxxxxxxxxxxxxxxx,
         BA = 32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
         
@@ -34,7 +38,7 @@ package target_package;
         // NOP = 32'b111101101000xxxxxxxxxxxxxxxxxxxx,
         NOP = 32'b11110000100000000000000000000000,
         // NOP = 32'b00000000000000000000000000000000,
-        Store = 32'b11100101100000000xxx000000000000,
+        Store = 32'b1110010110000000xxxx000000000000, // VITAL WARNING , mostafa made it 4 unknowns
         SWZE   =32'b1110010110000xxx0xxxxxxxxxxxxxxx, // store word reg-imm zero extend
         SWZERR= 32'b1110011110000xxx0xxx000000000xxx, // store word reg-reg zero extend
         SBZE   =32'b1110010111000xxx0xxxxxxxxxxxxxxx, // store byte reg-imm zero extend
@@ -48,6 +52,12 @@ package target_package;
         RDPSR =  32'b11100101100000001111000000000000
     } opcode; 
     // mutual instructions between cores have the same name so we can verify all cores using one scoreboard
+
+       //FLAG PLACE DECLARATION
+        parameter LOC_ZF = 30;
+        parameter LOC_CF = 29;
+        parameter LOC_VF = 28;
+        parameter LOC_NF = 31;
     
         //INSTRUCTION FORMAT (for arithmatic)
         parameter RDU = 15;
