@@ -21,8 +21,9 @@ function void verify_subx(GUVM_sequence_item cmd_trans,GUVM_result_transaction r
 	
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
     begin	
-        old_c = hist_trans.carry ;
-		h1 = i1 + i2 - old_c ;
+		// old_c = hist_trans.carry ;
+		old_c = hist_trans.borrow ;
+		h1 = i1 + i2 - (old_c) ;
 		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
 
         // hist_trans.carry=h1[32];

@@ -92,6 +92,10 @@ package target_package;
                 end
         `endif
     endfunction
+    
+    function logic update_borrrow_flag(logic carry);
+        return !carry ; 
+    endfunction
 
 
     // function to determine format of verfied instruction and fill its operands

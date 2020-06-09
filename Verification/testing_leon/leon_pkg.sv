@@ -75,8 +75,12 @@ package target_package;
     opcode si_a [] ;    // opcodes array to store enums so we can randomize and use them
     integer supported_instructions ;    // number of instructions in the array
     `include "leon_defines.sv"
-	`include"GUVM.sv"   // including GUVM classes 
+    `include"GUVM.sv"   // including GUVM classes 
+    
 
+    function logic update_borrrow_flag(logic carry);
+        return carry ; 
+    endfunction
 
     // fill supported instruction array
     function void fill_si_array();

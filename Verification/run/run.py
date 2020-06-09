@@ -81,7 +81,7 @@ DUT: """;
 	print g;
 	if g == "1":
 		y=("add_test")
-		os.system(x+y+" +ARG_INST=A; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST=A; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "2":
 		y=("bief_test")
@@ -102,7 +102,7 @@ DUT: """;
 			z=("BCSF")
 		elif z == "4":
 			z=("BVSF")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "3":
 		y=("A_type_test")
@@ -180,7 +180,7 @@ DUT: """;
 			z=("LBMAZE")
 		elif z == "23":
 			z=("LBMAZERR")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "4":
 		y=("load_double_test")
@@ -195,7 +195,7 @@ DUT: """
 			z=("LDD")
 		elif z == "2":
 			z=("LDDRR")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "5":
 		y=("arith_flag_test")
@@ -228,7 +228,7 @@ DUT: """;
 			z=("SUBX")
 		elif z == "8":
 			z=("SUBXCC")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "6":
 		y=("store_test")
@@ -276,7 +276,7 @@ DUT: """;
 			z=("SBZE")
 		elif z == "13":
 			z=("SBZERR")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "7":
 		y=("mul_test")
@@ -297,7 +297,7 @@ DUT: """;
 			z=("MHSUR")
 		elif z == "4":
 			z=("MHUR")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 ################################################################################################################
 	elif g == "8":
 		y=("arith_flag_amber_test")
@@ -330,7 +330,7 @@ DUT: """;
 			z=("SUBX")
 		elif z == "8":
 			z=("SUBXCC")
-		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; transcript file trans/run.txt;run -all ; quit\"")
 
 #################################################################################################################
 	else:

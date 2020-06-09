@@ -19,7 +19,8 @@ function void verify_subxcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction
 	
 	if (cmd_trans.SOM == SB_HISTORY_MODE)
     begin	
-        old_c = hist_trans.carry ;
+		// old_c = hist_trans.carry ;
+		old_c = hist_trans.borrow ;
 		h1 = i1 + i2 - old_c ;
 		hist_trans.loadreg(h1[31:0],cmd_trans.rd);
 
@@ -27,7 +28,7 @@ function void verify_subxcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction
         hist_trans.neg = h1[31];
 		hist_trans.zero = (h1[31:0]==0);
         hist_trans.overflow = (i1[31]&&i2[31]&&(~h1[31])) || ((~i1[31])&&(~i2[31])&&(h1[31]));
-        
+        hist_trans.borrow=update_borrrow_flag(h1[32]);
         
 
 		//$display("holaaaaaaaaaaaaa3a33a3a %d,CARRY = %d",h1,hist_trans.carry);
@@ -84,19 +85,23 @@ function void verify_subxcc(GUVM_sequence_item cmd_trans,GUVM_result_transaction
 		end
 		if (q[1][LOC_NF]!=hist_trans.neg) begin
 			success = 0 ;
-			report = {report , $sformatf("wrong icc negative flag : dut flag =%d, SB flag =%d \n",q[1][23],hist_trans.neg)};
+			report = {report , $sformatf("wrong icc negative flag : dut flag =%d, SB flag =%d \n",q[1][LOC_NF],hist_trans.neg)};
 		end
 		if (q[1][LOC_ZF]!=hist_trans.zero) begin
 			success = 0 ;
-			report = {report , $sformatf("wrong icc zero flag : dut flag =%d, SB flag =%d \n",q[1][22],hist_trans.zero)};
+			report = {report , $sformatf("wrong icc zero flag : dut flag =%d, SB flag =%d \n",q[1][LOC_ZF],hist_trans.zero)};
 		end
 		if (q[1][LOC_VF]!=hist_trans.overflow) begin
 			success = 0 ;
-			report = {report , $sformatf("wrong icc overflow flag : dut flag =%d, SB flag =%d \n",q[1][21],hist_trans.overflow)};
+			report = {report , $sformatf("wrong icc overflow flag : dut flag =%d, SB flag =%d \n",q[1][LOC_VF],hist_trans.overflow)};
 		end
-		if (q[1][LOC_CF]!=hist_trans.carry) begin
+		// if (q[1][LOC_CF]!=hist_trans.carry) begin
+		// 	success = 0 ;
+		// 	report = {report , $sformatf("wrong icc carry flag : dut flag =%d, SB flag =%d \n",q[1][LOC_CF],hist_trans.carry)};
+		// end
+		if (q[1][LOC_CF]!=hist_trans.borrow) begin
 			success = 0 ;
-			report = {report , $sformatf("wrong icc carry flag : dut flag =%d, SB flag =%d \n",q[1][21],hist_trans.carry)};
+			report = {report , $sformatf("wrong icc carry flag : dut flag =%d, SB flag =%d \n",q[1][LOC_CF],hist_trans.borrow)};
 		end
 		if(!success)report = {report , $sformatf("rs1=%d,rs2=%d,rd=%d\n",cmd_trans.rs1,cmd_trans.rs2,cmd_trans.rd)};
 
