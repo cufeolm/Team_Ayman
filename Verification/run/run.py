@@ -73,6 +73,8 @@ load --> load --> change flag --> command --> check flag --> store
 load --> load --> store(2)
 7- mul_test (based on RISC-v ISA, Sparcv8 ISA) -->7
 load --> load --> mul(35) --> store(2)
+8- arithmatic with and without flag arith_flag_amber_test (based on ARM v2a ISA ) -->8
+load --> load --> change flag --> command --> check flag --> store
 any other input wil terminate the simulation
 DUT: """;
 	g = raw_input(s);
@@ -285,6 +287,28 @@ DUT: """;
 			z=("MHUR")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 ################################################################################################################
+	elif g == "8":
+		y=("arith_flag_amber_test")
+		s="""
+please choose which instruction to simulate:
+1- ADD  (based on ARM ISA): enter --> add
+2- Add and change ICC flags (based on ARM ISA): enter --> addcc
+3- Add with carry (based on ARM ISA): enter --> addx
+4- Add with carry and change ICC flags(based on ARM ISA): enter --> addxcc
+any other input will simulate no operation or make an error in the simulation
+DUT: """;
+		z=raw_input(s)     
+		if z == "1":
+			z=("A")
+		elif z == "2":
+			z=("ADDCC")
+		elif z == "3":
+			z=("ADDX")
+		elif z == "4":
+			z=("ADDXCC")
+		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
+
+#################################################################################################################
 	else:
 		print("please enter a valid number")
 		break
