@@ -205,6 +205,10 @@ please choose which instruction to simulate:
 2- Add and change ICC flags (based on sparc-v8 ISA): enter --> addcc
 3- Add with carry (based on sparc-v8 ISA): enter --> addx
 4- Add with carry and change ICC flags(based on sparc-v8 ISA): enter --> addxcc
+5- SUB (based on sparc-v8 ISA): enter --> SUB
+6- SUB and change ICC flags (based on sparc-v8 ISA): enter --> SUBcc
+7- SUB with carry (based on sparc-v8 ISA): enter --> SUBx
+8- SUB with carry and change ICC flags(based on sparc-v8 ISA): enter --> SUBxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)     
@@ -216,6 +220,14 @@ DUT: """;
 			z=("ADDX")
 		elif z == "4":
 			z=("ADDXCC")
+		elif z == "5":
+			z=("SUB")
+		elif z == "6":
+			z=("SUBCC")
+		elif z == "7":
+			z=("SUBX")
+		elif z == "8":
+			z=("SUBXCC")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 ################################################################################################################
 	elif g == "6":
@@ -295,6 +307,10 @@ please choose which instruction to simulate:
 2- Add and change ICC flags (based on ARM ISA): enter --> addcc
 3- Add with carry (based on ARM ISA): enter --> addx
 4- Add with carry and change ICC flags(based on ARM ISA): enter --> addxcc
+5- SUB (based on ARM ISA): enter --> SUB
+6- SUB and change ICC flags (based on ARM ISA): enter --> SUBcc
+7- SUB with carry (based on ARM ISA): enter --> SUBx
+8- SUB with carry and change ICC flags(based on ARM ISA): enter --> SUBxcc
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)     
@@ -306,6 +322,14 @@ DUT: """;
 			z=("ADDX")
 		elif z == "4":
 			z=("ADDXCC")
+		elif z == "5":
+			z=("SUB")
+		elif z == "6":
+			z=("SUBCC")
+		elif z == "7":
+			z=("SUBX")
+		elif z == "8":
+			z=("SUBXCC")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 
 #################################################################################################################
