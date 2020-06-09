@@ -11,7 +11,8 @@ package target_package;
         ADDXCC=   32'b1110000010110xxx0xxx000000000xxx,//ADD with carry and change flags
          
         SUBCC = 32'b1110000001010xxx0xxx000000000xxx,// SUB and change flags
-        S=      32'b1110000001000xxx0xxx000000000xxx,// subtract
+        SUB=      32'b1110000001000xxx0xxx000000000xxx,// subtract
+        
         
         Rs=     32'b1110000001100xxx0xxx000000000xxx,// reverse subtract
         Swc=32'b1110000011000xxx0xxx000000000xxx, // sub with carry
