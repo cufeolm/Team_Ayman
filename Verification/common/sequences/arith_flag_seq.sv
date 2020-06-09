@@ -85,9 +85,18 @@ class arith_flag_sequence extends GUVM_sequence ;
                 load4.rd=command.rs2;
             end 
 
-            store1.store(command.rd);//specify regz address
-            store2.store(rdpsr.rd);
-
+            if ($isunknown(command.rd))
+               store1.inst=findOP("NOP");
+            else
+            begin
+                store1.store(command.rd);//specify regz address
+            end 
+            if ($isunknown(rdpsr.rd))
+                store2.inst=findOP("NOP");
+            else
+            begin
+                store2.store(rdpsr.rd);//specify regz address
+            end 
             //forced input
             //$display("am i blind ------------------");
             //load1.data = 1;
