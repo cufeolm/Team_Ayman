@@ -20,8 +20,11 @@ package target_package;
 
         C=32'b1110000101010xxx0xxx000000000xxx,
 
-        BIEF=32'b00001010xxxxxxxxxxxxxxxxxxxxxxxx,
-        BA = 32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,
+        BIEF=   32'b00001010xxxxxxxxxxxxxxxxxxxxxxxx,//branch if equal flag
+        BCSF =  32'b00101010xxxxxxxxxxxxxxxxxxxxxxxx,// branch if carry flag is set
+        BNEGF = 32'b01001010xxxxxxxxxxxxxxxxxxxxxxxx,// branch if negative flag is set
+        BVSF =  32'b01101010xxxxxxxxxxxxxxxxxxxxxxxx,// branch if overflow flag is set
+        BA = 32'b11101010xxxxxxxxxxxxxxxxxxxxxxxx,//branch always
         
         BwA=32'b1110000000000xxx0xxx000000000xxx, // bitwise and
         BAwc=32'b1110000111000xxx0xxx000000000xxx, // bitwise and with complement

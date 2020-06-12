@@ -41,10 +41,10 @@ package target_package;
         UMULR=32'b10xxxxx001010xxxxx000000000xxxxx, // multiply reg-reg
         UDIVR=32'b10xxxxx001110xxxxx000000000xxxxx,
 
-        BIEF=32'b00x0001010xxxxxxxxxxxxxxxxxxxxxx,
-        BCSF = 32'b00x0101010xxxxxxxxxxxxxxxxxxxxxx,
-        BNEGF = 32'b00x0110010xxxxxxxxxxxxxxxxxxxxxx,
-        BVSF = 32'b00x0111010xxxxxxxxxxxxxxxxxxxxxx,
+        BIEF=32'b00x0001010xxxxxxxxxxxxxxxxxxxxxx,// branch if equal flag
+        BCSF = 32'b00x0101010xxxxxxxxxxxxxxxxxxxxxx,// branch if carry flag is set
+        BNEGF = 32'b00x0110010xxxxxxxxxxxxxxxxxxxxxx,// branch if negative flag is set
+        BVSF = 32'b00x0111010xxxxxxxxxxxxxxxxxxxxxx,// branch if overflow flag is set
 
         BA= 32'b00x1000010xxxxxxxxxxxxxxxxxxxxxx,
 
