@@ -131,6 +131,10 @@ please choose which instruction to simulate:
 21- Load word with misalignment feat., zero extending offset and reg-reg (based on ARM-v2a ISA): enter --> LWMAZERR
 22- Load byte with misalignment feat., zero extending offset and reg-imm (based on ARM-v2a ISA): enter --> LBMAZE
 23- Load byte with misalignment feat., zero extending offset and reg-reg (based on ARM-v2a ISA): enter --> LBMAZERR
+24- jump and ink offset (based on RISC-v ISA): enter --> Jal
+25- jump and ink reg-imm (based on RISC-v ISA): enter --> Jalr
+26- jump and link reg-imm 'cpc' (based on Sparcv8 ISA) --> Jalr_cpc
+27- jump and link reg-reg (based on Sparcv8 ISA) --> Jalrr
 any other input will simulate no operation or make an error in the simulation
 DUT: """;
 		z=raw_input(s)
@@ -180,6 +184,14 @@ DUT: """;
 			z=("LBMAZE")
 		elif z == "23":
 			z=("LBMAZERR")
+		elif z == "24":
+			z=("Jal")
+		elif z == "25":
+			z=("Jalr")
+		elif z == "26":
+			z=("Jalr_cpc")
+		elif z == "27":
+			z=("Jalrr")
 		os.system(x+y+" +ARG_INST="+z+"; log /* -r ; run -all ; quit\"")
 ################################################################################################################
 	elif g == "4":
