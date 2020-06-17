@@ -76,13 +76,25 @@ function void verify_bvsf(GUVM_sequence_item cmd_trans,GUVM_result_transaction r
         offset=((pcold +hist_trans.item_history[branch].cmd_trans.simm*4) != pcnew );
         //$display("supposed new pc = %d",pcold +hist_trans.item_history[branch].cmd_trans.simm*4);
 		
+		// report ="" ;
+		// if (dc&&offset) report = {report , $sformatf("offset is wrong , pc jumped somewhere else, DUT offset = 32'h%h,ScoreBoard Offset = 32'h%h,",pcnew-pcold,hist_trans.item_history[branch].cmd_trans.simm*4) } ;
+		// if ((dc&&(!condition))) report = {report , "condition not met and jumped anyway, "} ;
+		// // if ((annul&&(result != h1 ))) report = {report , "instruction not annuled when it should have "} ;
+		// if ((annul&&(result == i1+i2 ))) report = {report , "instruction not annuled when it should have "} ;
+		// success = (!(dc&&offset)) && (!(dc&&(!condition))) && (!(annul&&(result == i1+i2 )));
 		report ="" ;
 		if (dc&&offset) report = {report , $sformatf("offset is wrong , pc jumped somewhere else, DUT offset = 32'h%h,ScoreBoard Offset = 32'h%h,",pcnew-pcold,hist_trans.item_history[branch].cmd_trans.simm*4) } ;
 		if ((dc&&(!condition))) report = {report , "condition not met and jumped anyway, "} ;
-		// if ((annul&&(result != h1 ))) report = {report , "instruction not annuled when it should have "} ;
-		if ((annul&&(result == i1+i2 ))) report = {report , "instruction not annuled when it should have "} ;
-		success = (!(dc&&offset)) && (!(dc&&(!condition))) && (!(annul&&(result == i1+i2 )));
+        // if ((annul&&(result != h1 ))) report = {report , "instruction not annuled when it should have "} ;
+        
+        if (dc&&result == i1+i2 )begin 
+            //report = {report , "instruction not annuled when it should have "} ;
+            `uvm_info ("Annulment:0", "the instruction following Branch was annuled", UVM_LOW);
+        end
+        else if(dc&&result != i1+i2) `uvm_info ("Annulment:1", "the instruction following Branch was not annuled", UVM_LOW);
 
+        // success = (!(dc&&offset)) && (!(dc&&(!condition))) && (!(annul&&(result == i1+i2 )));
+        success = (!(dc&&offset)) && (!(dc&&(!condition))) ;
 
 
 		
